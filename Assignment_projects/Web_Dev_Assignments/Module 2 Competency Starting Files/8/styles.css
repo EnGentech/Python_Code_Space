@@ -1,0 +1,59 @@
+/********w*************
+
+    Competency 8
+    Name: 
+    Date:
+    Description:
+
+**********************/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+nav {
+	background-color: orange;
+	margin: 25px auto 0px;
+	width: 80%;
+	line-height: 70px;
+	font-size: 0.9em;
+	text-shadow: #000 1px 1px 3px;
+	box-shadow: 5px 5px 10px #000;
+	border-radius: 5px;
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	list-style: none;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+nav ul li {
+	padding: 0px 7px;
+}
+
+nav ul li a {
+	text-transform: uppercase;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 680px) {
+	nav ul{
+		display: block;
+	}
+
+	nav ul li{
+		border: 1px solid black;
+	}
+
+	nav ul li:hover{
+		background-color: rgba(255, 0, 0, 0.505);
+	}
+}

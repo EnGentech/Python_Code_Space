@@ -1,0 +1,39 @@
+/********w*************
+
+    Competency 11
+    Name: 
+    Date:
+    Description:
+
+**********************/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    width: 50%;
+    background-color: rgb(228, 220, 206);
+    color: darkblue;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+form input[type="text"], form input[type="email"], form input[type="tel"]{
+    width: 40%;
+    
+}
+
+form label {
+    padding-right: 20px;
+}

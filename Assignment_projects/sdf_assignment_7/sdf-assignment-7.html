@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 7</title>
+        <link rel="stylesheet" href="https://rrc-ace-org-test.github.io/Template-Styles/style.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+        <!-- highlight.js style demos https://highlightjs.org/static/demo/ -->
+    </head><body><header>
+<h1>Financial Data Processing Capstone Project</h1>
+<p>In this capstone project, you will work in a group to develop a Python application that intakes, processes, and outputs financial transaction data. This project will give you the opportunity to practice essential skills for a professional software developer, such as collaborative development, effective communication, and adhering to industry standards.</p>
+</header>
+<section id="table-contents" class="section section--topic" aria-label="Table of Contents">
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#overview">Project Overview</a></li>
+<li><a href="#tools">Tools You'll Need</a></li>
+<li><a href="#design">Design Requirements</a></li>
+<li><a href="#groupwork">Group Work Guidelines</a></li>
+<li><a href="#guides">Guides for Students</a></li>
+<li><a href="#kickoff">Project Kickoff</a></li>
+<li><a href="#details">Assignment Details</a></li>
+<li><a href="#checkpoints">Milestone Checkpoints</a></li>
+<li><a href="#submission">Submission Guidelines</a></li>
+<li><a href="#review-preparation">Preparing for Face-to-Face Reviews</a></li>
+</ol>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="overview" class="section section--topic" aria-label="Project Overview">
+<h2>Project Overview</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>In this capstone project, you will collaborate with your peers in groups of approximately three members to develop a Python application that processes financial data. The application will receive transaction data from a CSV file, process it by performing various operations such as updating account summaries and identifying suspicious transactions, logs the processing events to a log file, and output the processed data to another file (CSV).</p>
+<p>Each of you will be responsible for one of the project's three main components:</p>
+<ul>
+<li>Input Handling: Reading and validating the input data from a CSV file, and implementing custom data validation rules.</li>
+<li>Data Processing: Processing the input data, updating account summaries, checking for suspicious transactions, and maintaining transaction statistics, while also implementing a configurable logging mechanism.</li>
+<li>Output Handling: Exporting the processed data to appropriate output files, with options for custom filtering.</li>
+</ul>
+<p>You will be assigned specific tasks via GitHub issues and will be responsible for resolving these issues to complete your portion of the project. The project will be developed in a single repository using Git and GitHub, following established software development practices such as creating branches, submitting pull requests, and performing code reviews.</p>
+<p>Throughout the project, you will learn and practice various skills, including Python programming, working with CSV and JSON files, implementing data validation and processing algorithms, using Git and GitHub for collaborative development, and adhering to group work guidelines to ensure successful project completion.</p>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="tools" class="section section--topic" aria-label="Tools You'll Need">
+<h2>Tools You'll Need</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To complete this assignment, you will need the following tools:</p>
+<ul>
+<li>A text editor (such as Visual Studio Code aka VSCode)</li>
+<li>A terminal (such as Terminal on Mac or PowerShell on Windows)</li>
+<li>Git</li>
+</ul>
+<p>If you don't already have these tools installed on your computer, you can download or access them from the following links:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a></li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a></li>
+</ul>
+</section>
+<section id="design" class="section section--topic" aria-label="Design Requirements">
+<h2>Design Requirements</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Please follow these requirements when completing your portion of the project:</p>
+<section>
+<h3>Data Input Format:</h3>
+<p>The input data files should be in one of the following formats:</p>
+<ul>
+<li>CSV (Comma-Separated Values)</li>
+<li>JSON (JavaScript Object Notation)</li>
+</ul>
+<p>The input data should contain the following fields:</p>
+<ul>
+<li>Transaction ID</li>
+<li>Account number</li>
+<li>Date</li>
+<li>Transaction type</li>
+<li>Amount</li>
+<li>Currency</li>
+<li>Description</li>
+</ul>
+</section>
+<section>
+<h3>Data Output Format:</h3>
+<p>The output data files should be in one of the following formats:</p>
+<ul>
+<li>CSV (Comma-Separated Values) for account summaries and suspicious transactions</li>
+</ul>
+<p>Account summaries output should contain the following fields:</p>
+<ul>
+<li>Account number</li>
+<li>Balance</li>
+<li>Total Deposits</li>
+<li>Total Withdrawals</li>
+</ul>
+<p>Suspicious transactions output should contain the following fields:</p>
+<ul>
+<li>Transaction ID</li>
+<li>Account number</li>
+<li>Date</li>
+<li>Transaction type</li>
+<li>Amount</li>
+<li>Currency</li>
+<li>Description</li>
+</ul>
+<p>Transaction statistics output should contain the following fields:</p>
+<ul>
+<li>Transaction type</li>
+<li>Total amount</li>
+<li>Transaction count</li>
+</ul>
+</section>
+<section>
+<h3>Log File Format:</h3>
+<p>The log file format should be plain text, with each log entry containing the following information:</p>
+<ul>
+<li>Timestamp</li>
+<li>Log level (e.g., INFO, WARNING, ERROR, etc.)</li>
+<li>Log message</li>
+</ul>
+<p>Example:</p>
+<pre><code class="console">
+2023-06-02 15:39:50,765 - INFO - Account summary updated: 1001
+</code></pre>
+<p>The log file should record important events, warnings, and errors that occur during the processing of financial data. Users should be able to configure the log level and log output format.</p>
+</section>
+<section>
+<h3>Expected Output:</h3>
+<p>The application should process the input data and generate the following outputs:</p>
+<ul>
+<li>Account summaries for each account, including the account balance, total deposits, and total withdrawals</li>
+<li>A list of suspicious transactions based on predefined or custom criteria</li>
+<li>Transaction statistics, including the total amount and transaction count per transaction type</li>
+<li>A log file containing logs of important events, warnings and errors.</li>
+</ul>
+</section>
+</section>
+<section id="groupwork" class="section section--topic" aria-label="Group Work Guidelines">
+<h2>Group Work Guidelines</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To promote equal contribution from all students and ensure the success of the project, follow these guidelines and project plan:</p>
+<section id="task-assignment">
+<h3>Task Assignment:</h3>
+<p>During the <a href="#kickoff">Project Kickoff</a>, each group member was defined a role. Below are the roles along with their corresponding issues. While each student is responsible for their assigned issues, a familiarity with the other roles is important as students are also responsible for providing feedback to their teammates in the form of code reviews.</p>
+<ul>
+<li>Group member 1: InputHandler (issues 1 and 4)</li>
+<li>Group Member 2: DataProcessor (issues 2 and 5)</li>
+<li>Group Member 3: OutputHandler (issues 3 and 6)</li>
+</ul>
+</section>
+<section id="milestones-and-issues">
+<h3>Milestones and Issues:</h3>
+<p>During the <a href="#kickoff">Project Kickoff</a>, your team will have created two milestones in your GitHub repository.</p>
+<p>When assigning Issues to Milestones in your GitHub repository, add the provided due dates and assign the issues to the responsible group members.</p>
+</section>
+<section id="branching-and-pull-requests">
+<h3>Branching and Pull Requests:</h3>
+<p>When you are about to begin work on your assigned issues, you should:</p>
+<ol>
+<li>Create a new branch for that issue in the GitHub repository.</li>
+<li>Ensure the branch and issue are linked by including the issue number in the branch name (e.g., issue-1-input-class).</li>
+<li>Work on your task and commit the changes to the branch.</li>
+<li>Create a pull request when you finish your task, and request a review from your teammates.</li>
+</ol>
+</section>
+<section id="code-reviews-and-merging">
+<h3>Code Reviews and Merging:</h3>
+<p>Before merging the pull request, your teammates should:</p>
+<ol>
+<li>Review the code changes in the pull request.</li>
+<li>Provide feedback or request changes if necessary.</li>
+<li>Approve the pull request once they are satisfied with the changes.</li>
+<li>Merge the pull request into the main branch after the approval.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ol>
+</section>
+<section id="code-conflict-resolution">
+<h3>Code Conflict Resolution:</h3>
+<p>If there are any conflicts between the branches, you should:</p>
+<ol>
+<li>Code conflicts will be best resolved during class time in case instructor assistance is needed.</li>
+<li>Attempt to resolve them yourself first, either individually or as a group.</li>
+<li>If conflicts persist, consult your instructor for assistance.</li>
+</ol>
+</section>
+<section id="accountability-and-communication">
+<h3>Accountability and Communication:</h3>
+<p>If a groupmate is not completing their tasks, you should:</p>
+<ol>
+<li>First, try to work with them to understand why and find a solution.</li>
+<li>If the problem persists, notify your instructor.</li>
+</ol>
+</section>
+</section>
+<section id="guides" class="section section--topic" aria-label="Guides for Students">
+<h2>Guides for Students</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<section id="guides-table-contents" aria-label="Table of Contents for Guides for Students">
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#starting-git">Getting Started with Git and GitHub</a></li>
+<li><a href="#conflicts">Dealing with Git Conflicts</a></li>
+<li><a href="#issues">Managing GitHub Issues and Milestones</a></li>
+<li><a href="#code-reviews">Code Reviews</a></li>
+<li><a href="#colab-tips">Tips for Collaborating and Staying on Track</a></li>
+<li><a href="#ethics">Ethical Practices for Using Online Resources</a></li>
+</ol>
+</section>
+<section id="starting-git">
+<h3>Getting Started with Git and GitHub</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<p>Before starting the project, students should review the following guides to learn how to use Git and GitHub:</p>
+<ul>
+<li><a href="https://guides.github.com/introduction/git-handbook/" target="_blank" rel="noopener">Git Handbook</a></li>
+<li><a href="https://guides.github.com/" target="_blank" rel="noopener">GitHub Guides</a></li>
+</ul>
+</section>
+<section id="conflicts">
+<h3>Dealing with Git Conflicts</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<p>When working with a shared repository, it's common to encounter conflicts between different code versions. Students should review the following guides to learn how to deal with Git conflicts:</p>
+<ul>
+<li><a href="https://docs.github.com/en/github/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github" target="_blank" rel="noopener">GitHub Docs: Resolving a Merge Conflict</a></li>
+<li><a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts" target="_blank" rel="noopener">Atlassian: How to Resolve Conflicts in Git</a></li>
+</ul>
+<h4>Conflicts Guide</h4>
+<ol>
+<li>Identify the conflict: First, you'll receive a notification that there's a conflict when you try to merge branches or pull changes. Git will tell you which files have conflicts. In this project, since each of you will be working within a specific file for your assigned class, the most likely file to have conflicts is main.py.</li>
+<li>Pull the latest changes: Before resolving the conflict, ensure you have the latest changes from the remote repository. Run <code>git pull origin main</code> to fetch the latest updates.</li>
+<li>Open the conflicted file: Open the main.py file in your favourite text editor or IDE. Git will mark the conflicting sections with special markers (&lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, and &gt;&gt;&gt;&gt;&gt;&gt;&gt;). These markers separate the conflicting changes made by you and the other contributor.</li>
+<li>Review the changes: Carefully review the changes between the markers. The changes made by you will be between &lt;&lt;&lt;&lt;&lt;&lt;&lt; and =======, while the changes made by the other contributor will be between ======= and &gt;&gt;&gt;&gt;&gt;&gt;&gt;.</li>
+<li>Resolve the conflict: Decide which changes should be kept, or if a combination of the changes is appropriate. Edit the file to remove the markers and keep only the desired changes. Make sure the code remains functional and adheres to the project requirements.</li>
+<li>Test the changes: Before committing the resolved conflict, test the code to ensure everything works as expected. Run the application and verify that there are no issues or errors.</li>
+<li>Commit and push the changes: Once you're satisfied with the resolution, stage the changes with <code>git add main.py</code>, and then commit them using <code>git commit -m "Resolved conflict in main.py"</code>. Finally, push the changes to the remote repository with <code>git push</code>.</li>
+</ol>
+</section>
+<section id="issues">
+<h3>Managing GitHub Issues and Milestones</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<p>GitHub issues are a great way to track progress and assign tasks to different team members. Students should review the following guide to learn how to manage GitHub issues:</p>
+<ul>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue" target="_blank" rel="noopener">GitHub Docs: Creating and Managing Issues</a></li>
+<li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-a-milestone" target="_blank" rel="noopener">GitHub Docs: Creating and Managing Milestones</a></li>
+</ul>
+<h4>Creating Issues and Milestones in GitHub</h4>
+<p>Follow the steps below to create issues and milestones in GitHub based on the provided project plan:</p>
+<ol>
+<li>Create a new milestone in GitHub for each milestone in the project plan. Set the deadline and provide a brief description of the milestone's goals.</li>
+<li>For each issue listed under a milestone, create a new issue in GitHub. In the issue, provide a detailed description of the task and any additional context that may be helpful to the assigned team member.</li>
+<li>Assign the issue to the appropriate team member and add any relevant labels (e.g., "documentation", "testing", "enhancement", etc.).</li>
+<li>Link the issue to the corresponding milestone to help track progress and ensure that all issues are completed by the milestone deadline.</li>
+<li>Encourage team members to regularly update their assigned issues with their progress, any challenges they face, and any changes they make to the scope or approach of the task.</li>
+<li>When an issue is completed, the team member should close the issue and update the milestone progress accordingly.</li>
+</ol>
+<p>By following the project plan and regularly updating issues and milestones in GitHub, the team can effectively collaborate, track progress, and ensure that all tasks are completed on time and to a high standard.</p>
+</section>
+<section id="code-reviews">
+<h3>Code Reviews</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<ol>
+<li>Understand the changes: Begin by understanding the purpose of the changes in the pull request. Read the issue description and any comments provided by the author to understand the context and the expected outcome.</li>
+<li>Check the code: Go through the code changes in the pull request. Look for the following:
+<ul>
+<li>Are the changes addressing the issue?</li>
+<li>Is the code easy to understand, or are there any confusing or unclear parts?</li>
+<li>Are there any syntax errors, typos, or formatting inconsistencies?</li>
+</ul>
+</li>
+<li>Verify the tests: If tests are provided, check if they cover the changes made and pass successfully. If no tests are provided, ask your teammate to add tests for their changes.</li>
+<li>Provide feedback: With steps 2 and 3 in mind, leave comments on the pull request to provide feedback. Be clear and specific about the changes you suggest. Remember to be polite and constructive in your feedback.</li>
+<li>Approve the pull request: If you are satisfied with the changes, approve the pull request. Once all reviewers have approved the pull request, it can be merged.</li>
+</ol>
+</section>
+<section id="colab-tips">
+<h3>Tips for Collaborating and Staying on Track</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<p>To help ensure the success of the project, consider these tips for effective collaboration and maintaining progress:</p>
+<ul>
+<li>Hold regular meetings with your team to discuss progress, share updates, and address any challenges or concerns. Use these meetings to keep everyone informed and aligned with the project's goals.</li>
+<li>Use the GitHub issue comments and discussion features to maintain open communication with your teammates. Ask questions, provide feedback, and offer support as needed.</li>
+<li>When working on an issue, create a branch in the GitHub repository dedicated to that specific task. This helps to keep the main branch stable and prevents conflicts between different team members' work.</li>
+<li>Monitor the progress of the milestones and issues in GitHub to ensure that tasks are being completed on time. If any issues are falling behind schedule, discuss the situation with the assigned team member and offer support or adjust the timeline as needed.</li>
+<li>Encourage a culture of code reviews and constructive feedback to ensure that the team produces high-quality code and learns from one another's expertise.</li>
+<li>Stay in contact with your instructor, providing updates on the project's progress and seeking guidance or feedback when necessary. This will help to ensure that your team stays on the right track and can address any issues that arise in a timely manner.</li>
+</ul>
+<p>By following these tips and maintaining open communication with your team members and instructor, you can effectively manage the project, stay on schedule, and deliver a high-quality final product.</p>
+</section>
+<section id="ethics">
+<h3>Ethical Practices for Using Online Resources</h3>
+<a href="#guides-table-contents" class="scrollToToc">Scroll to top of Guides for Students</a>
+<ul>
+<li><strong>Understand the Code:</strong> Before using any code found online, ensure you understand how it works and how it relates to your specific assignment. If you do not understand the code, you may not be able to adapt it properly or use it effectively in your project.</li>
+<li><strong>Give Credit to Original Authors:</strong> Always give credit to the original authors of the code you use in your assignment. This is not only an ethical practice but also helps to promote a culture of collaboration and respect among developers. You can give credit by citing the source in your code comments.</li>
+<li><strong>Proper Citation Styles:</strong> When citing code sources in your comments, use a consistent citation style. Here are some examples:
+<ul>
+<li>For code snippets found on websites, you can use the following format:
+<pre><code class="markdown">
+# Source: [Author Name (if available)], [Title of the webpage], [URL], [Date accessed]                                
+                            </code></pre>
+</li>
+<li>For code snippets from forums (e.g., Stack Overflow), you can use the following format:
+<pre><code class="markdown">
+# Source: [Author Name (if available)], [Title of the forum thread], [URL], [Date accessed]
+# Answer by: [Answer author name (if available)], [Answer author's profile URL (if available)]                          
+                            </code></pre>
+</li>
+<li>For code snippets from GitHub repositories or other version control systems, you can use the following format:
+<pre><code class="markdown">
+# Source: [Author Name (if available)], [Repository Name], [URL], [Commit ID (if available)], [Date accessed]                      
+                            </code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Adapt and Customize the Code:</strong> Adapt and customize the code you find online to fit the specific requirements of your assignment. Avoid copying and pasting code verbatim without making any modifications. This demonstrates that you understand the code and can apply it to solve your unique problem.</li>
+<li><strong>Avoid Plagiarism:</strong> It is important to remember that using code from online sources should be a tool for learning and should not be used as a way to avoid writing your own code. Make sure to always contribute your own ideas and efforts to your assignments.</li>
+<li><strong>Respect Licenses:</strong> Always check and respect the licenses associated with the code you use. Some code may have specific requirements or restrictions regarding its use, modification, or distribution. Make sure you comply with these terms when using the code in your assignment.</li>
+</ul>
+</section>
+</section>
+<!-- Standard Git Setup Section -->
+<section id="kickoff" class="section section--topic" aria-label="Project structure and Git setup details">
+<h2>Project Kickoff</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Before we start the assignment, it's important to organize your project and get familiar with a powerful tool called version control. Good organization of your project files helps you keep track of your work, makes it easier to find specific files, and can improve overall workflow efficiency. With version control, you can keep track of all changes you make to your code, work together with other people on the same project, and even go back to an earlier version of your code if needed. So, let's get started and set up your project!</p>
+<section>
+<h3>Instructions:</h3>
+<p>Throughout the instructions, you will see placeholders in square braces, e.g. [PROJECT_NAME]. Please replace these placeholders with meaningful values before executing the commands. <br><strong>For example:</strong> <br>Replace [PROJECT_NAME] with the desired name for your project directory.</p>
+</section>
+<section>
+<h3>1. GROUP: Initial Group Meeting</h3>
+<p>In the steps that follow, most only need to be done once for the group. For those steps the heading will have a "GROUP" prefix.</p>
+<h4>Define Group Roles</h4>
+<p>Review the <a href="#details">Assignment Details</a> to gain a familiarity of the tasks that are required for each developer in the group. Then agree on the roles of each team member.</p>
+<p><b> Note: If the team consists of less than 3 people, remove the 'Developer' role of your choice from the list below. </b></p>
+<ol>
+<li><b>Developer 1</b>: Choose one person on your team as 'Developer 1'. Developer 1 will be responsible for issues 1 and 4.</li>
+<li><b>Developer 2</b>: Choose one person on your team as 'Developer 2'. Developer 2 will be responsible for issues 2 and 5.</li>
+<li><b>Developer 3</b>: Choose one person on your team as 'Developer 3'. Developer 3 will be responsible for issues 3 and 6.</li>
+</ol>
+</section>
+<section>
+<h3>2. GROUP: Create a new project directory:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>This step is about creating a folder where you can store all the files related to your project.</p>
+<p>Open the terminal or PowerShell.</p>
+<p>Change the current directory to where you want to store your project. For example:</p>
+<pre><code class="bash">
+cd ~/projects
+                    </code></pre>
+<p>Create a new directory for your project. For example:</p>
+<pre><code class="bash">
+mkdir [PROJECT_NAME]
+                    </code></pre>
+</section>
+<section>
+<h3>3. GROUP: Initialize a new Git repository:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>This step is about setting up a Git repository for your project so you can start tracking changes to your code.</p>
+<p>Change the current directory to the project directory:</p>
+<pre><code class="bash">
+cd [PROJECT_NAME]
+                    </code></pre>
+<p>Initialize the Git repository:</p>
+<pre><code class="bash">
+git init
+                    </code></pre>
+<p>The <strong>git init</strong> command is used to create a new Git repository in the current directory.</p>
+</section>
+<section>
+<h3>4. GROUP: Create a new repository on GitHub:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>Follow the instructions on GitHub to create a new repository for your project: <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository" target="_blank" rel="noopener">GitHub Documentation</a></p>
+<p>Set your repository to Private.</p>
+<p>Leave the other options at their default selections. That is:</p>
+<ul>
+<li>Do not create a README.md file at this time (a README file will be provided).</li>
+<li>Do not create a .gitignore file at this time (a .gitignore file will be provided).</li>
+<li>Do not choose a license.</li>
+</ul>
+<p>Add each of the members of your Group, as well as your instructor as collaborators:</p>
+<ul>
+<li>Click the Settings tab.</li>
+<li>On the left sidebar, under Access select Collaborators.</li>
+<li>Click the <b>Add people</b> button.</li>
+<li>Add the email address or username of each member of your Group as well as your instructor.</li>
+</ul>
+</section>
+<section>
+<h3>5. GROUP: Connect the local repository to the remote repository on GitHub:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>This step is about setting up a connection between your local Git repository and the remote repository on GitHub so you can push and pull changes between the two.</p>
+<p>In the terminal/PowerShell, add the remote repository to your local repository:</p>
+<pre><code class="bash">
+git remote add origin https://github.com/[YOUR_GITHUB_USERNAME]/[PROJECT_NAME].git
+                </code></pre>
+<p>Replace [YOUR_GITHUB_USERNAME] and [PROJECT_NAME] with the appropriate values.</p>
+<p>The <strong>git remote add</strong> command is used to add the remote repository to your local repository.</p>
+</section>
+<section>
+<h3>6. GROUP: Set up the project and starter files:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>Download and unzip the provided starter file:</p>
+<ul>
+<li><a href="assignment_starters/a7/financial_data_processor.zip?isCourseFile=true" target="_self">financial_data_processor.zip</a></li>
+</ul>
+<p>Copy the provided starter files and directory structure into your project directory. The starter files include:</p>
+<pre><code class="console">
+financial_data_processor/
+│
+├── data_processor/
+│   ├── __init__.py
+│   └── data_processor.py
+│
+├── input/
+│   ├── input_data.csv
+│   └── input_data.json
+│
+├── input_handler/
+│   ├── __init__.py
+│   └── input_handler.py
+│
+├── output/
+│   └── .gitignore
+│
+├── output_handler/
+│   ├── __init__.py
+│   └── output_handler.py
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_data_processor.py
+│   ├── test_input_handler.py
+│   └── test_output_handler.py
+│ 
+├── .gitignore
+├── main.py
+└── README.md
+                </code></pre>
+<p>In the terminal/PowerShell, navigate to the project directory and run the following command:</p>
+<pre><code class="bash">
+code .
+                </code></pre>
+<p>The <strong>code .</strong> command is used to open the project directory in Visual Studio Code.</p>
+<p>Modify the <i>README.md</i> file for your project by entering each of the names of the students in your group beside each of the developer titles:</p>
+<pre><code class="markdown">
+# Authors
+- Developer 1: {Enter Student Name Here}
+- Developer 2: {Enter Student Name Here}
+- Developer 3: {Enter Student Name Here}
+            </code></pre>
+</section>
+<section>
+<h3>7. GROUP: Stage and commit the changes:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>After setting up the project structure and files, you need to "stage" them for commit. This basically means telling Git which files you want to include in your next commit.</p>
+<p>Return to the terminal/PowerShell and add the files to the staging area:</p>
+<pre><code class="bash">
+git add .
+                </code></pre>
+<p>The <strong>git add</strong> command stages the changes you made to the README file.</p>
+<p>After staging the changes, you can create a commit with a message describing the changes you made.</p>
+<p>Commit the changes with a meaningful message:</p>
+<pre><code class="bash">
+git commit -m "Initial commit: Set up project directory and file structure"
+                </code></pre>
+</section>
+<section>
+<h3>8. GROUP: Push the changes to the remote repository on GitHub:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>This step is about pushing the changes you made to your local repository to the remote repository on GitHub.</p>
+<p>Push the changes from your local repository to the remote repository on GitHub:</p>
+<pre><code class="bash">
+git push -u origin main
+                </code></pre>
+<p>The <strong>git push</strong> command sends the changes to the remote repository under the name of the branch, in this case "main".</p>
+</section>
+<section>
+<h3>9. GROUP: Define Milestones:</h3>
+<p>This step will be done collaboratively as a group.</p>
+<p>Within your GitHub Repository, define two milestones:</p>
+<ol>
+<li><b>Milestone 1</b>: Documentation and Tests</li>
+<li><b>Milestone 2</b>: Validation, Logging, and Filtering</li>
+</ol>
+</section>
+<section>
+<h3>10. <u>EACH TEAM MEMBER</u>: Clone the Repository:</h3>
+<p><b>NOTE</b>: This step must be done <b>only</b> by the Team Members that <b>DID NOT</b> complete steps 2 through 9 above.</p>
+<p>The Team Member who completed steps 2 through 9 above already has the repository on their computer.</p>
+<p>When you clone a repository, you create a local copy of all the files, commit history, branches, and other version control information associated with the original repository.</p>
+<p>To clone the GitHub repository:</p>
+<pre><code class="bash">
+git clone https://[YOUR_TEAMMATES_GITHUB_USERNAME]/[PROJECT_NAME].git
+                </code></pre>
+<h3>11. <u>EACH TEAM MEMBER</u>: Run the application:</h3>
+<p>Now that each team member has a clone (or original) of the GitHub repository, ensure you understand the current functionality of the application.</p>
+<ul>
+<li>Review the input data found in the <b>input</b> directory.</li>
+<li>Review the code found in the <b>data_processor</b>, <b>input_handler</b> and <b>output_handler</b> directories, as well as the <b>main.py</b> file found at the root of your directory structure.</li>
+<li>Run the code residing in the <code>main.py</code> file.</li>
+<li>Review the files generated from the execution of the application. Generated files will be found in the <b>output</b> directory.</li>
+</ul>
+</section>
+</section>
+<!-- Assignment Body - All assignment specific steps are outlined here -->
+<section id="details" class="section section--topic" aria-label="Detailed assignment steps">
+<h2>Assignment Details</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<h3>This project has been defined to incorporate many of the skills learned throughout the semester, as well as to practice new skills learned in this module. The requirements that follow do not address all of the requirements that this system <i>should</i> include. For example, some data validation, unit tests, and refactoring opportunities are omitted. Nevertheless, this project does provide a good practical experience which can summarize many of the important skills introduced in this course.</h3>
+<p>The following project plan outlines the milestones and issues that students need to complete as part of the project. These milestones and issues should be created and managed within GitHub.</p>
+<section>
+<h3>Milestone 1: Documentation and Tests for Input, Processing, and Output Classes</h3>
+<p>Create the following <a href="#milestones-and-issues">issues</a> within the GitHub repository and assign them to the appropriate team member:</p>
+<h3>Issue 1: Add Documentation and Tests for InputHandler class</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Ensure you are in the directory in which your clone resides.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git fetch origin
+
+* [new branch]      branch_name  -&gt; origin/branch_name
+                </code></pre>
+</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git checkout branch_name
+
+Switched to a new branch 'branch_name'
+branch 'branch_name' set up to track 'origin/branch_name'.
+                    </code></pre>
+</li>
+<li>Use the <code>code .</code> command to open Visual Studio Code within your branch.
+<pre><code class="bash">
+&gt; code .
+                </code></pre>
+</li>
+</ul>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<ul>
+<li>The <code>InputHandler</code> class has been defined in the <i>input_handler.py</i> file of the <i>input_handler</i> directory.</li>
+<li>Review the code in the <code>InputHandler</code> class to gain an understanding of what each method does within the class.</li>
+<li>Write comprehensive documentation (in the form of docstrings) <b><u>and</u></b> comments for the <code>InputHandler</code> class.</li>
+<li>Ensure PEP-8 documentation guidelines are adhered to when documenting the class.</li>
+<li>Use inline commenting as necessary to ensure the code is well-explained and easy to understand.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<h4>Unit Tests</h4>
+<ul>
+<ul>
+<li>In the <i>tests</i> directory, modify the <i>test_input_handler.py</i> file.</li>
+<li>Create the following unit tests:</li>
+<ol>
+<li><b>get_file_format</b>: Test to verify that the extension is returned when the file has a proper extension (e.g. .csv, .json).</li>
+<li><b>get_file_format</b>: Test to verify that an empty string is returned when the file does not have an extension.</li>
+<li><b>read_csv_data</b>: Test to verify that a populated list is returned when the .csv file exists and contains data.</li>
+<li><b>read_csv_data</b>: Test to verify that an empty list is returned when the .csv file exists, but is empty.</li>
+<li><b>read_csv_data</b>: Test to verify that a FileNotFoundError exception is raised when the .csv file does not exist.</li>
+<li><b>read_input_data</b>: Test to verify that a populated list is returned when a valid .csv file is used.</li>
+<li><b>read_input_data</b>: Test to verify that an empty list is returned when a file with an invalid extension is used.</li>
+</ol>
+<li><b>Note</b>: Some of the above tests will require the use of mocking to 'mock' the file-reading behaviour. Refer to the Module 5 Course Notes for a discussion on Mocking File Input.</li>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group.</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr>
+<h3>Issue 2: Add Documentation and Tests for DataProcessor class</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Ensure you are in the directory in which your clone resides.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git fetch origin
+
+* [new branch]      branch_name  -&gt; origin/branch_name
+                    </code></pre>
+</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git checkout branch_name
+
+Switched to a new branch 'branch_name'
+branch 'branch_name' set up to track 'origin/branch_name'.
+                    </code></pre>
+</li>
+<li>Use the <code>code .</code> command to open Visual Studio Code within your branch.
+<pre><code class="bash">
+&gt; code .
+                    </code></pre>
+</li>
+</ul>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<ul>
+<li>The <code>DataProcessor</code> class has been defined in the <i>data_processor.py</i> file of the <i>data_processor</i> directory.</li>
+<li>Review the code in the <code>DataProcessor</code> class to gain an understanding of what each method does within the class.</li>
+<li>Write comprehensive documentation (in the form of docstrings) <b><u>and</u></b> comments for the <code>DataProcessor</code> class.</li>
+<li>Ensure PEP-8 documentation guidelines are adhered to when documenting the class.</li>
+<li>Use inline commenting as necessary to ensure the code is well-explained and easy to understand.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<h4>Unit Tests</h4>
+<ul>
+<ul>
+<li>In the <i>tests</i> directory, modify the <i>test_data_processor.py</i> file.</li>
+<li><b>Note:</b> A DataProcessor object is created with a list of dictionaries defined in the InputHandler class (each dictionary in the list represents a record to be processed). The following list is has been defined as a constant called INPUT_DATA in the test file. To use this list in your tests, reference it using <code>self.INPUT_DATA</code>:
+<pre><code class="bash">
+INPUT_DATA = [{"Transaction ID":"1" ,"Account number":"1001" ,
+    "Date":"2023-03-01" ,"Transaction type": "deposit",
+    "Amount":1000,"Currency":"CAD","Description":"Salary"}, 
+    {"Transaction ID":"2" ,"Account number":"1002" ,
+    "Date":"2023-03-01" ,"Transaction type": "deposit",
+    "Amount":1500,"Currency":"CAD","Description":"Salary"}]
+                    </code></pre>
+</li>
+<li>Create the following unit tests:</li>
+<ol>
+<li><b>update_account_summary</b>: Test to verify that the balance and total_deposits values in the account_summary dictionary are correct when a deposit row is processed.</li>
+<li><b>update_account_summary</b>: Test to verify that the balance and total_deposits values in the account_summary dictionary are correct when a withdrawal row is processed.</li>
+<li><b>check_suspicious_transactions</b>: Test to verify that a transaction amount considered 'large' is written to the suspicious_transactions list.</li>
+<li><b>check_suspicious_transactions</b>: Test to verify that a transaction type considered an 'uncommon currency' is written to the suspicious_transactions list.</li>
+<li><b>update_transaction_statistics</b>: Test to verify that transaction statistics are being accurately reported.</li>
+<li><b>get_average_transaction_amount</b>: Test to verify that the deposit average and withdrawal average are being correctly calculated.</li>
+</ol>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group.</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr>
+<h3>Issue 3: Add Documentation and Tests for OutputHandler class</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Ensure you are in the directory in which your clone resides.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git fetch origin
+
+* [new branch]      branch_name  -&gt; origin/branch_name
+                    </code></pre>
+</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch. You should see output similar to the following:
+<pre><code class="bash">
+&gt; git checkout branch_name
+
+Switched to a new branch 'branch_name'
+branch 'branch_name' set up to track 'origin/branch_name'.
+                    </code></pre>
+</li>
+<li>Use the <code>code .</code> command to open Visual Studio Code within your branch.
+<pre><code class="bash">
+&gt; code .
+                    </code></pre>
+</li>
+</ul>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<ul>
+<li>The <code>OutputHandler</code> class has been defined in the <i>output_handler.py</i> file of the <i>output_handler</i> directory.</li>
+<li>Review the code in the <code>OutputHandler</code> class to gain an understanding of what each method does within the class.</li>
+<li>Write comprehensive documentation (in the form of docstrings) <b><u>and</u></b> comments for the <code>OutputHandler</code> class.</li>
+<li>Ensure PEP-8 documentation guidelines are adhered to when documenting the class.</li>
+<li>Use inline commenting as necessary to ensure the code is well-explained and easy to understand.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<h4>Unit Tests</h4>
+<ul>
+<ul>
+<li>In the <i>tests</i> directory, modify the <i>test_output_handler.py</i> file.</li>
+<li><b>Note:</b> An OutputHandler object is created with 3 parameters defined in the DataProcessor class:
+<ul>
+<li>account summaries: A dictionary of dictionaries of valid transactions.</li>
+<li>suspicious transactions: A list of dictionaries each dictionary being a suspicious transaction.</li>
+<li>transaction statistics: A dictionary of dictionaries containing summary data.</li>
+</ul>
+</li>
+<li><b>Note:</b>The following constants have been defined within the test class.</li>
+<li>To use these constants in your tests, reference them using self.ACCOUNT_SUMMARIES, self.SUSPICIOUS_TRANSACTIONS and self.TRANSACTION_STATISTICS:
+<pre><code class="bash">
+ACCOUNT_SUMMARIES = { '1001': {'account_number': '1001', 'balance': 50, 
+    'total_deposits': 100, 'total_withdrawals': 50},
+    '1002': {'account_number': '2', 'balance': 200, 
+    'total_deposits': 200, 'total_withdrawals': 0}}
+
+SUSPICIOUS_TRANSACTIONS = [{"Transaction ID":"1" ,"Account number":"1001" ,
+    "Date":"2023-03-14" ,"Transaction type": "deposit",
+    "Amount":250,"Currency":"XRP","Description":"crypto investment"}  ]
+
+TRANSACTION_STATISTICS = {'deposit': {'total_amount': 300, 'transaction_count': 2}, 
+    'withdrawal': {'total_amount': 50, 'transaction_count': 1}}
+    </code></pre>
+</li>
+<li>Create the following unit tests:</li>
+<ol>
+<li><b>write_account_summaries_to_csv</b>: Test to verify that the that the file was created and contains the expected number of rows (including the header row).</li>
+<li><b>write_suspicious_transactions_to_csv</b>: Test to verify that the that the file was created and contains the expected number of rows (including the header row).</li>
+<li><b>write_transaction_statistics_to_csv</b>: Test to verify that the that the file was created and contains the expected number of rows (including the header row).</li>
+</ol>
+<li><b>Note</b>: The above tests will require the use of mocking to 'mock' the file-writing behaviour. Refer to the Module 5 Course Notes for a discussion on Mocking File Writing.</li>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group.</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr></section>
+<section>
+<h3>Milestone Checkpoint</h3>
+<p>Prepare for and complete your <a href="#checkpoints">Milestone Checkpoint</a> before proceeding on to Milestone 2.</p>
+</section>
+<section>
+<h3>Milestone 2: Enhancing Input, Processing, and Output Functionality</h3>
+<p>Create the following <a href="#milestones-and-issues">issues</a> within the GitHub repository and assign them to the appropriate team member:</p>
+<h3>Issue 4: Add Data Validation for Input Data in InputHandler class</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches.</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch.</li>
+</ul>
+</ul>
+<br><strong>Validation</strong>
+<ul>
+<ul>
+<li>Create a method in your InputHandler class called <code>data_validation</code>.</li>
+<li>The method should receive as a parameters:</li>
+<ul>
+<li><code>data</code>: The list of dictionaries produced by the <code>read_input_data</code> method.</li>
+</ul>
+<li>The method should return a list of dictionaries containing only valid data.</li>
+<li>Ensure your <code>data_validation</code> method includes an appropriate docstring.</li>
+</ul>
+</ul>
+<br><strong>Research:</strong>
+<ul>
+<ul>
+<li>Validation has been incorporated into your assignments since Assignment 4. Below is a list of resources that may help when incorporating validation into your assignment:
+<ul>
+<li>Assignments 4, 5 and 6</li>
+<li><a href="https://easypythondocs.com/validation.html" target="_blank" rel="noopener">Easy Python Docs: Validation</a></li>
+<li><a href="https://www.educba.com/python-validation/" target="_blank" rel="noopener">EDUCBA: Validation</a></li>
+<li><a href="https://www.javatpoint.com/python-validation" target="_blank" rel="noopener">Java T Point: Validation</a></li>
+<li><a href="https://stackoverflow.com/questions/74021572/data-validation-inside-a-function-python">Stack Overflow: Validation</a></li>
+</ul>
+<br><strong>Implement:</strong></li>
+<li>Implement the <code>data_validation</code> method.</li>
+<li>Iterate through the data and apply the following validation:</li>
+<ul>
+<li><b>Amount Validation</b></li>
+<ul>
+<li>The 'Amount' value must be a non-negative float.</li>
+<li>If the amount is valid, the record should be <u>included</u> in the list returned from this method.</li>
+<li>If the amount is not valid, the record should be <u>excluded</u> from the list returned from this method.</li>
+</ul>
+<li><b>Transaction Type Validation</b></li>
+<ul>
+<li>The 'Transaction type' value must be one of 'deposit', 'withdrawal' or 'transfer'.</li>
+<li>If the 'Transacation type' is valid, the record should be <u>included</u> in the list returned from this method.</li>
+<li>If the 'Transaction type' is not valid, the record should be <u>excluded</u> from the list returned from this method.</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<li>If you drew inspiration from your research, make sure to understand the code and adapt it to fit the specific requirements of the assignment. When using code from other sources, remember to document the sources you used for your code solutions by adding the citations directly to your code as comments. See: <a href="#ethics">Ethical Practices for Using Online Resources</a></li>
+</ul>
+</ul>
+<br><strong>Unit Test:</strong>
+<ul>
+<ul>
+<li>In the <i>test_input_handler.py</i> file, create the following unit tests for your <code>data_validation</code> method.</li>
+<ol>
+<li><b>data_validation</b>: A test to verify that the returned list excludes records with a non-numeric amount.</li>
+<li><b>data_validation</b>: A test to verify that the returned list excludes records with a negative amount.</li>
+<li><b>data_validation</b>: A test to verify that the returned list excludes records with an invalid transaction_type.</li>
+</ol>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br><strong>Integrate:</strong>
+<ul>
+<ul>
+<li>Integrate your validation functionality into the working solution.</li>
+<li>Update the <code>read_input_data</code> method by returning the results of your <code>data_validation</code> method.</li>
+<li>Test your results by introducing invalid records into the <i>input_data.csv</i> file and/or the <i>input_data.json</i> file and ensure that the invalid records are not included in the output files produced.</li>
+</ul>
+</ul>
+<br>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group. If changes were made:
+<ul>
+<li>Push your changes to the appropriate branch in GitHub.</li>
+</ul>
+</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr>
+<h3>Issue 5: Adding Process Logging to DataProcessor class</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches.</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch.</li>
+</ul>
+</ul>
+<br><strong>Logging</strong>
+<ul>
+<ul>
+<li>Develop a logging mechanism to capture important events, warnings, and errors while processing financial data.</li>
+<li><b>Note</b>: Refer to the Module 4 Course Notes for information on logging within classes.</li>
+</ul>
+</ul>
+<br><strong>Research:</strong>
+<ul>
+<ul>
+<li>Logging was discussed in Module 4, but has not been applied to an assignment until now. Below is a list of resources that may help when incorporating logging into your application:
+<ul>
+<li>Module 4 Course Notes</li>
+<li><a href="https://realpython.com/python-logging/" target="_blank" rel="noopener">Real Python: Logging</a></li>
+<li><a href="https://docs.python.org/3/howto/logging.html" target="_blank" rel="noopener">Python: Logging HOWTO</a></li>
+<li><a href="https://www.loggly.com/ultimate-guide/python-logging-basics/" target="_blank" rel="noopener">Loggly: Python Logging Basics</a></li>
+<li><a href="https://pythonin1minute.com/how-to-test-logging-in-python/" target="_blank" rel="noopener">PY1M: How to test Logging in Python</a></li>
+</ul>
+<br><strong>Implement:</strong></li>
+<li>Implement logging into the DataProcessor class.</li>
+<li>Modify the DataProcessor class to include appropriate import statement(s) which will allow for logging functionality to be used.</li>
+<li>Modify the __init__ method to receive 3 additional optional parameters:
+<ul>
+<li><b>logging level</b>: The level of severity which will cause a record to be logged. If excluded, default to WARNING.</li>
+<li><b>logging format</b>: The way in which the log messages should be formatted. If excluded, default to the <a href="#design"> format</a> provided</li>
+<li><b>log file</b>: The file to which logging will be written. If excluded, no action is needed (by default the logging will be written to the console).</li>
+</ul>
+</li>
+<li>Further modify the __init__ to ensure all of the basic configuration settings for logging have been defined based on the optional parameters.</li>
+<li>Remember to update your __init__ documentation based on the above changes.</li>
+<li>Update the following methods in the DataProcessor class to incorporate the following logging messages under the following circumstances with the corresponding logging level:
+<ul>
+<li><b>process_data</b>: "Data Processing Complete": Level INFO</li>
+<li><b>update_account_summary</b>: "Account summary updated: {account_number}": Level INFO</li>
+<li><b>check_suspicious_transactions</b>: "Suspicious transaction: {row}": Level WARNING</li>
+<li><b>update_transaction_statistics</b>: "Updated transaction statistics for: {transaction_type}": Level INFO</li>
+</ul>
+</li>
+<li>Ensure log messages are provided for at minimum the scenarios provided above. Additional logging messages may be added at your discretion.</li>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<li>If you drew inspiration from your research, make sure to understand the code and adapt it to fit the specific requirements of the assignment. When using code from other sources, remember to document the sources you used for your code solutions by adding the citations directly to your code as comments. See: <a href="#ethics">Ethical Practices for Using Online Resources</a></li>
+</ul>
+</ul>
+<br><strong>Unit Test:</strong>
+<ul>
+<ul>
+<li>Modify the existing unit tests to ensure the __init__ is called correctly as it now has additional parameters to be mindful of.</li>
+<li>Create one additional unit test for the method of your choice to verify that the logging is working as expected.</li>
+<li><b>Hint:</b>Use the <code>assertLogs()</code> method to verify the number of logged items.</li>
+<li>Execute all of your DataProcessor unit tests to ensure the new functionality does not impact your original test results.</li>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br><strong>Integrate:</strong>
+<ul>
+<ul>
+<li>Integrate your logging functionality into the working solution.</li>
+<li>Modify <code>main.py</code> such that when the DataProcessor object is created, it is created with a log file called fdp_team_#.log (where the # is replaced with your group number for this project) and with logging.INFO as its logging level.</li>
+<li>Logging should now be written to a file and should occur at minumum under the following scenarios:
+<ul>
+<li>Completion of data processing.</li>
+<li>Updates to account summaries.</li>
+<li>Detection of suspicious transactions.</li>
+<li>Updates to transaction statistics.</li>
+</ul>
+</li>
+<li>Test the solution.</li>
+</ul>
+</ul>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group. If changes were made:
+<ul>
+<li>Push your changes to the appropriate branch in GitHub.</li>
+</ul>
+</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr>
+<h3>Issue 6: Add Filtering Output Data</h3>
+<ul>
+<ul>
+<li>Create a <a href="#branching-and-pull-requests">branch</a> associated with this issue.</li>
+<li>Use the <code>git fetch</code> command to provide your local repository with an updated list of branches.</li>
+<li>Use the <code>git checkout</code> command to switch to your newly created branch.</li>
+</ul>
+</ul>
+<br><strong>Filtering</strong>
+<ul>
+<ul>
+<li>Filtering will be achieved in your OutputHandler class by creating two methods:</li>
+<ul>
+<li><code>filter_account_summaries</code></li>
+<li><code>write_filtered_summaries_to_csv</code></li>
+</ul>
+<li>The <code>filter_account_summaries</code> method will filter the Account Summaries data based on the provided filter criteria.</li>
+<li>The <code>write_filtered_summaries_to_csv</code> method will export the filtered data to an output file.</li>
+<li>The filtering functionality must be completed by creating new method(s) whose specific purpose is for filtering. (That is, the sorting and filtering cannot be directly embedded into existing methods).</li>
+</ul>
+</ul>
+<br><strong>Research:</strong>
+<ul>
+<ul>
+<li>Filtering is a new concept introduced in this assignment. Below is a list of resources that may help when incorporating filtering into your application:
+<ul>
+<li><a href="https://realpython.com/python-filter-function/" target="_blank" rel="noopener">Real Python: Python Filter Function</a></li>
+<li><a href="https://www.programiz.com/python-programming/methods/built-in/filter/" target="_blank" rel="noopener">Programiz: Python Filter</a></li>
+</ul>
+<br><strong>Implement:</strong> <br><strong>filter_account_summaries</strong></li>
+<li>Create a filtering method in your OutputHandler class called <code>filter_account_summaries</code>.</li>
+<li>The method should receive as parameters:</li>
+<ul>
+<li>filter field (string): One of the following filter fields: "balance","total_deposits" or "total_withdrawals".</li>
+<li>filter value (integer): An integer value to which the filter field will be compared.</li>
+<li>filter mode (boolean): The mode to which filtering will take place:
+<ul>
+<li>True: Greater than or Equal.</li>
+<li>False: Less than or Equal.</li>
+</ul>
+</li>
+</ul>
+<li>The method should return a list containing only filtered records.</li>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<li>Iterate through the <code>_account_summaries</code> list of dictionaries. When the 'filter field' is encountered, compare its value to the 'filter value' based on the 'filter mode' parameter.</li>
+<li>If the filter criteria are met by the data in the dictionary being evaluted, append that record to a list.</li>
+<li>Return the list.</li>
+</ul>
+</ul>
+<br><strong>write_filtered_summaries_to_csv</strong>
+<ul>
+<ul>
+<li>Create a new method in the OutputHandler class called <code>write_filtered_summaries_to_csv</code> to write the filtered data to a .csv file.</li>
+<li>This method will receive as parameters:</li>
+<ul>
+<li>filtered data: The list of filtered data obtained by executing the filtering method above.</li>
+<li>file path: The file name, including its path, to which the data will be written.</li>
+</ul>
+<li>Refer to some of the existing printing methods in the OutputHandler class as reference. Write code to write the filtered records to the specified output file.</li>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<li>If you drew inspiration from your research, make sure to understand the code and adapt it to fit the specific requirements of the assignment. When using code from other sources, remember to document the sources you used for your code solutions by adding the citations directly to your code as comments. See: <a href="#ethics">Ethical Practices for Using Online Resources</a></li>
+</ul>
+</ul>
+<br><strong>Unit Test:</strong>
+<ul>
+<ul>
+<li>In the <i>test_output_handler.py</i> file, create the following unit tests for your new methods.</li>
+<ol>
+<li><b>filter_account_summaries_less_than</b>: A test to verify that the returned list contains only the filtered records when the filter mode indicates 'less than'.</li>
+<li><b>filter_account_summaries_greater_than</b>: A test to verify that the returned list contains only the filtered records when the filter mode indicates 'greater than'.</li>
+<li><b>write_filtered_summaries_to_csv</b>: A test to that the file was created and contains the expected number of rows.</li>
+</ol>
+<li>Ensure all tests pass before moving on to the next step.</li>
+</ul>
+</ul>
+<br><strong>Integrate:</strong>
+<ul>
+<ul>
+<li>Integrate your filtering functionality into the working solution by calling the methods at the end of the main() function:</li>
+<ul>
+<li>Define a filtered filename of your choice using the same technique as was used to define the current file names.</li>
+<li>Call the <code>filter_account_summaries</code> method with appropriate parameters of your choice.</li>
+<li>Call the <code>write_filtered_summaries_to_csv</code> with the list returned from the <code>filter_account_summaries</code> method along with the filename defined above.</li>
+</ul>
+<li>A new Output file should be produced and should contain the results of filtering if those conditions exist.</li>
+<li>Test the solution.</li>
+</ul>
+</ul>
+<p class="reminder">✱✱✱ Save and commit the changes on your branch with a meaningful message. ✱✱✱</p>
+<ul>
+<li>Push your changes to the <b>appropriate branch</b> in GitHub.</li>
+<li>Within your GitHub Repository, create a <a href="#branching-and-pull-requests">pull request</a>. Ensure your pull request has a clear title and description.</li>
+<li>Based on feedback received, make the necessary modifications, addressing the suggestions of your Group. If changes were made:
+<ul>
+<li>Push your changes to the appropriate branch in GitHub.</li>
+</ul>
+</li>
+<li>Once the changes have been approved, merge the pull request to the main branch. Handle any <a href="#conflicts">conflicts</a> appropriately.</li>
+<li>Following the merge, when prompted to delete the branch <b>do not delete the branch</b>.</li>
+</ul>
+<hr></section>
+<section>
+<h3>Milestone Checkpoint</h3>
+<p>Prepare for and complete your <a href="#checkpoints">Milestone Checkpoint</a>.</p>
+</section>
+</section>
+<section id="checkpoints" class="section section--topic" aria-label="Milestone Checkpoints">
+<h2>Milestone Checkpoints</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Checkpoints are an essential part of the project to ensure that you're on track and following the Group Work guidelines correctly. Here's a guide on how checkpoints will work and what you need to do during each checkpoint:</p>
+<ol>
+<li>Schedule checkpoints: At the beginning of the project, your instructor will provide you with a schedule for checkpoints. Make sure to mark these dates on your calendar and set reminders to keep track of your progress.</li>
+<li>Prepare for the checkpoint: Ensure you have completed your assigned milestone issues before each checkpoint. This includes:
+<ul>
+<li>Creating branches and linking them to your assigned issues.</li>
+<li>Submitting pull requests and getting them reviewed and approved by your teammates.</li>
+<li>Merging the approved pull requests into the main branch.</li>
+<li>Ensuring that the project is up-to-date and working correctly.</li>
+<li>Ensure you have an up-to-date version of your project locally for your demonstration:
+<pre><code class="bash">
+git checkout main
+git pull origin main                   
+                        </code></pre>
+</li>
+</ul>
+</li>
+<li>Document your progress: Keep a record of your work on the project, including your completed tasks, pull requests, and code reviews. This documentation will help you demonstrate your progress to your instructor during the checkpoint.</li>
+<li>Check-in with your instructor: During the checkpoint, meet with your instructor to show your progress. Show them the completed issues, pull requests, and code reviews. Be prepared to discuss any challenges you faced and how you overcame them. Your instructor may ask questions or provide feedback to help you improve.</li>
+<li>Discuss group dynamics: Share with your instructor how your group works together, following the Group Work guidelines, and addressing any issues that arise. Discuss your concerns about the project's progress with your instructor.</li>
+<li>Receive feedback and adjust: Your instructor will assess your progress and provide feedback on your work. Listen carefully to their suggestions and make any necessary adjustments to your project plan or group dynamics.</li>
+<li>Plan for the next checkpoint: After receiving feedback from your instructor, discuss the next steps with your group members. Ensure everyone is clear about their responsibilities and deadlines for the next milestone. If any adjustments need to be made to the project plan, update it accordingly.</li>
+</ol>
+</section>
+<!-- Add more sections for additional questions -->
+<section id="submission" class="section section--topic" aria-label="Submission Guidelines">
+<h2>Submission Guidelines</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Please follow these guidelines when submitting your project:</p>
+<ul>
+<li>Push your latest committed file(s) to your GitHub repository.</li>
+<li>Do any final pull requests to ensure all issues have been brought forward.</li>
+<li>Once all changes have been approved merge the pull request to the main branch (handling conflicts appropriately).</li>
+<li>GROUP: Submit a link to your Group's GitHub repository to your Group dropbox in LEARN.</li>
+<li>GROUP: Submit a zipped version of your project to your Group dropbox in LEARN. The zipped file should include all project files and should be named using the following format: <code>lastname_lastname_lastname_project.zip</code> (where each 'lastname' corresponds with the last name of each group member.</li>
+</ul>
+<p>Here's how you can zip your project on Windows:</p>
+<ol>
+<li>Select all project files you want to include in the zip file.</li>
+<li>Right-click on one of the selected files and select "Send to" &gt; "Compressed (zipped) folder".</li>
+<li>A new zipped folder will be created with the selected files. Rename the zipped folder to follow the naming convention specified above.</li>
+</ol>
+</section>
+<section id="review-preparation" class="section section--topic" aria-label="Preparing for Face-to-Face Reviews">
+<h2>Preparing for Face-to-Face Reviews</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To make the most of the limited time available for face-to-face reviews with instructors, it's important to come prepared. Follow these guidelines to ensure an efficient and productive review session:</p>
+<ul>
+<li><strong>Have your project's GitHub repository open:</strong> Before the review, ensure that you have pushed all your latest changes to the GitHub repository. Have the repository open in your browser, ready to show the instructor.</li>
+<li><strong>Open your code in Visual Studio Code:</strong> Have your project open in Visual Studio Code with all relevant files easily accessible. Familiarize yourself with the key parts of your code so you can quickly navigate and discuss it with the instructor.</li>
+<li><strong>Prepare a list of specific questions or concerns:</strong> If you have any doubts or need clarification on specific topics, prepare a list of questions or concerns beforehand. This will help you make the most of the limited time available during the review session.</li>
+<li><strong>Be ready to explain your code and thought process:</strong> Instructors may ask you about your code, the decisions you made, and your overall approach to the assignment. Be prepared to discuss your work and explain your reasoning.</li>
+<li><strong>Have a notepad and pen handy:</strong> Take notes during the review session to remember key points, feedback, and any follow-up actions you need to take.</li>
+</ul>
+<p>Following these guidelines will help ensure a productive face-to-face review session and allow both you and your instructor to make the most of the time available.</p>
+</section>
+<footer><!-- The following scripts are needed to apply the syntax highlighting to the page -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+                hljs.highlightAll();
+            </script></footer></body></html>

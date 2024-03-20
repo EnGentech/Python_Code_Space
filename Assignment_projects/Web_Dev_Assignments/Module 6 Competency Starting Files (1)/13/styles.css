@@ -1,0 +1,22 @@
+/*******w**************
+
+    Competency 13
+    Name: 
+    Date: 
+    Description: 
+
+**********************/
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+form {
+	width: 50%;
+}
+
+input[type='text'] {
+	display: none;
+}

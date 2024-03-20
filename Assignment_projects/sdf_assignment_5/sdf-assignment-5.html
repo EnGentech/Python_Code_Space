@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 5</title>
+                <link rel="stylesheet" href="https://rrc-ace-org-test.github.io/Template-Styles/style.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+    <!-- highlight.js style demos https://highlightjs.org/static/demo/ -->
+    </head><body><header>
+<h1>Creating a Chatbot for Banking Tasks in Python</h1>
+<p>In this assignment, you will have the opportunity to practice your knowledge of Python functions by creating a chatbot that assists customers with banking tasks. Prior to this assignment, you will have learned about git, variables and data types, exception handling, looping and data structures. By completing this assignment, you will learn valuable skills that are essential for a professional software developer such as code organization, modularity, and best practices for developing functions and corresponding unit tests.</p>
+</header>
+<section id="table-contents" class="section section--topic" aria-label="Table of Contents">
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#overview">Assignment Overview</a></li>
+<li><a href="#tools">Tools You'll Need</a></li>
+<li><a href="#setup">Project Setup</a></li>
+<li><a href="#details">Assignment Details</a></li>
+<li><a href="#submission">Submission Guidelines</a></li>
+<li><a href="#review-preparation">Preparing for Face-to-Face Reviews</a></li>
+</ol>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="overview" class="section section--topic" aria-label="Assignment Overview">
+<h2>Assignment Overview</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>The assignment will be divided into thirteen steps, with each step building on the previous one. You will start by defining the chatbot's functionality as well as its input/output specifications. Then, you will write and test each of the functions necessary for the chatbot to execute properly. You will follow PEP8 guidelines for coding style and documentation. These are important skills that professional software developers use to create maintainable, reusable, and efficient code.</p>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="tools" class="section section--topic" aria-label="Tools You'll Need">
+<h2>Tools You'll Need</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To complete this assignment, you will need the following tools:</p>
+<ul>
+<li>A text editor (such as Visual Studio Code aka VSCode)</li>
+<li>A terminal (such as Terminal on Mac or PowerShell on Windows)</li>
+<li>Git</li>
+</ul>
+<p>If you don't already have these tools installed on your computer, you can download or access them from the following links:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a></li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a></li>
+</ul>
+</section>
+<!-- Standard Git Setup Section -->
+<section id="setup" class="section section--topic" aria-label="Project structure and Git setup details">
+<h2>Project Setup</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Before we start the assignment, it's important to organize your project and get familiar with a powerful tool called version control. Good organization of your project files helps you keep track of your work, makes it easier to find specific files, and can improve overall workflow efficiency. With version control, you can keep track of all changes you make to your code, work together with other people on the same project, and even go back to an earlier version of your code if needed. So, let's get started and set up your project!</p>
+<section>
+<h3>Instructions:</h3>
+<p>Throughout the instructions, you will see placeholders in square braces, e.g. [PROJECT_NAME]. Please replace these placeholders with meaningful values before executing the commands. <br><strong>For example:</strong> <br>Replace [PROJECT_NAME] with the desired name for your project directory.</p>
+</section>
+<section>
+<h3>1. Download the Given Project Directory:</h3>
+<p>The directory structure as well as some given files are included in this assignment. Download and extract the given directory structure into your Assignments directory.</p>
+<ul>
+<li><a href="assignment_starters/a5/sdf_assignment_5.zip?isCourseFile=true" target="_self">sdf_assignment_5</a></li>
+</ul>
+<p>Following this step, your directory structure should be as follows:</p>
+<pre><code class="plaintext">
+sdf_assignment_5/
+    src/
+        __init__.py
+        chatbot.py
+    tests/
+        __init__.py
+        test_chatbot.py
+    __init__.py
+    .gitignore     
+    README.md
+                </code></pre>
+<p></p>
+</section>
+<section>
+<h3>2. Initialize a new Git repository:</h3>
+<p>This step is about setting up a Git repository for your project so you can start tracking changes to your code.</p>
+<p>Change the current directory to the project directory:</p>
+<pre><code class="bash">
+cd [PROJECT_NAME]
+                </code></pre>
+<p>Initialize the Git repository:</p>
+<pre><code class="bash">
+git init
+                </code></pre>
+<p>The <strong>git init</strong> command is used to create a new Git repository in the current directory.</p>
+</section>
+<section>
+<h3>3. Create a new repository on GitHub:</h3>
+<p>Follow the instructions on GitHub to create a new repository for your project: <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository" target="_blank" rel="noopener">GitHub Documentation</a></p>
+<p>Set your repository to Private.</p>
+<p>Leave the other options at their default selections. That is:</p>
+<ul>
+<li>Do not create a README.md file at this time (it will be created later in the assignment).</li>
+<li>Do not create a .gitignore file at this time (it will be created later in the assignment).</li>
+<li>Do not choose a license.</li>
+</ul>
+</section>
+<section>
+<h3>4. Connect the local repository to the remote repository on GitHub:</h3>
+<p>This step is about setting up a connection between your local Git repository and the remote repository on GitHub so you can push and pull changes between the two.</p>
+<p>In the terminal/PowerShell, add the remote repository to your local repository:</p>
+<pre><code class="bash">
+git remote add origin https://github.com/[YOUR_GITHUB_USERNAME]/[PROJECT_NAME].git
+            </code></pre>
+<p>Replace [YOUR_GITHUB_USERNAME] and [PROJECT_NAME] with the appropriate values.</p>
+<p>The <strong>git remote add</strong> command is used to add the remote repository to your local repository.</p>
+</section>
+<section>
+<h3>5. Create a new file or use a provided file:</h3>
+<p>In the terminal/PowerShell, run the following command:</p>
+<pre><code class="bash">
+code .
+                </code></pre>
+<p>The <strong>code .</strong> command is used to open the project directory in Visual Studio Code.</p>
+<p>Some basic Python documentation exists in the <b>chatbot.py</b> program in the <b>src</b> directory as well as the <b>test_chatbot.py</b> program in the <b>tests</b> directory. As you work through the assignment, ensure you update the documentation as necessary.</p>
+<p>The <b>README.md</b> file for your project has been started. As you work through the assignment, ensure you update the README.md file as necessary.</p>
+</section>
+<section>
+<h3>6. .gitignore file:</h3>
+<p>The <b>.gitignore</b> file for your assignment has been created and does not require any modificaations.</p>
+</section>
+<section>
+<h3>7. Stage and commit the changes:</h3>
+<p>After making changes to the code, you need to "stage" them for commit. This basically means telling Git which files you want to include in your next commit.</p>
+<p>Return to the terminal/PowerShell and add the files to the staging area:</p>
+<pre><code class="bash">
+git add .
+                </code></pre>
+<p>The <strong>git add</strong> command stages the changes you made to the README file.</p>
+<p>After staging the changes, you can create a commit with a message describing the changes you made.</p>
+<p>Commit the changes with a meaningful message:</p>
+<pre><code class="bash">
+git commit -m "Initial commit: Set up project directory and file structure"
+                </code></pre>
+</section>
+<section>
+<h3>8. Push the changes to the remote repository on GitHub:</h3>
+<p>This step is about pushing the changes you made to your local repository to the remote repository on GitHub.</p>
+<p>Push the changes from your local repository to the remote repository on GitHub:</p>
+<pre><code class="bash">
+git push -u origin main
+                </code></pre>
+<p>The <strong>git push</strong> command sends the changes to the remote repository under the name of the branch, in this case "main".</p>
+</section>
+</section>
+<!-- Assignment Body - All assignment specific steps are outlined here -->
+<section id="details" class="section section--topic" aria-label="Detailed assignment steps">
+<h2>Assignment Details</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<section aria-label="User story">
+<h3>User Story</h3>
+<div class="user-story">
+<p><span>As a</span> banking customer,</p>
+<p><span>I want to</span> check my account balance and make deposits,</p>
+<p><span>So that</span> I can keep track of my finances and make transactions easily.</p>
+</div>
+</section>
+<section id="tests">
+<h3>1. Setup Test Class: ChatbotTests</h3>
+<p>Open the file called <i>test_chatbot.py</i> in your code editor. This file will be used to define unit tests for your chatbot functions. <br>Included in the given file are two import statements which will allow you to use <b>unittest</b> functionality. Additional import statements will be required later in the assignment:</p>
+<pre><code class="python">
+import unittest
+from unittest.mock import patch
+            </code></pre>
+<p>Define the Unit Test class by inheriting unittest.TestCase:</p>
+<pre><code class="python">
+class ChatbotTests(unittest.TestCase):
+            </code></pre>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="constants">
+<h3>2. Given Constants</h3>
+<p>Open the file <i>chatbot.py</i>:</p>
+<p>Two constants have been defined for use by the functions that will be created in this file:</p>
+<ul>
+<ul>
+<li><b>ACCOUNTS</b>: A constant to store some mock data. <b>Note</b>: Normally account data would be retrieved from a database, but for this assignment, the accounts and balances will be stored in a dictionary:</li>
+</ul>
+</ul>
+<pre><code class="python">
+# Mock account data
+ACCOUNTS = {
+    123456: {"balance": 1000.0},
+    789012: {"balance": 2000.0}
+}           
+                        </code></pre>
+<ul>
+<ul>
+<li><b>VALID_TASKS</b>: A constant to store the various actions that can be taken using the Chatbot:</li>
+</ul>
+</ul>
+<pre><code class="python">
+VALID_TASKS = ["balance", "deposit", "exit"]          
+                        </code></pre>
+<p></p>
+</section>
+<section id="get_account">
+<h3>3. Create function: get_account</h3>
+<h4>Write the function:</h4>
+<p>In the <i>chatbot.py</i> file, implement the <code>get_account</code> function to prompt the user for the account number and return it as an integer.</p>
+<ul>
+<ul>
+<li><code>get_account()-&gt;int</code>:</li>
+<ul>
+<li>The <code>get_account</code> function should not take any parameters.</li>
+<li>The <code>get_account</code> function should return an integer.</li>
+<li>The <code>get_account</code> function raises the following exceptions:
+<ul>
+<li>ValueError</li>
+<li>Exception</li>
+</ul>
+</li>
+<li>The <code>get_account</code> function will prompt the user for an account number. If a <b>valid</b> account number is entered, it is returned. If an <b>invalid</b> account number is entered, an exception will be raised. An account number is considered <b>valid</b> if it is an integer AND exists in the ACCOUNTS dictionary.</li>
+</ul>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Prompt the user to enter their account number.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Please enter your account number: 
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Using a try/except block in which the exception being caught is a <code>ValueError</code> exception:
+<ul>
+<li>Attempt to parse the account number entered by the user to an integer.</li>
+<li>If an exception occurs during the attempted parse, use the except block to raise a <b>ValueError</b> exception with the following message:</li>
+</ul>
+<pre><code class="console">
+Account number must be a whole number.
+                            </code></pre>
+</li>
+<li>Determine whether the account number exists in the ACCOUNTS dictionary.</li>
+<li>If the account number does not exist, raise an <b>Exception</b> with the following message:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Account number entered does not exist.
+                            </code></pre>
+<ul>
+<ul>
+<li>As a final line of code in this function, return account number (parsed as an integer). This return will execute as long as no exceptions were raised during the execution of this function.</li>
+<li>Include an appropriate docstring with a function description, parameter list, return description and any exceptions raised.</li>
+</ul>
+</ul>
+<h4>Write the test(s):</h4>
+<p>For this first set of unit tests, you will be guided through the process.</p>
+<p>In the <i>test_chatbot.py</i> file, import your new function:</p>
+<pre><code class="python">
+from src.chatbot import get_account
+                </code></pre>
+<p>Also import the VALID_TASKS and ACCOUNTS constants so that they may be referenced as necessary within your unit tests.</p>
+<pre><code class="python">
+from src.chatbot import VALID_TASKS, ACCOUNTS
+                </code></pre>
+<p>Think about the possible outcomes for get_account:</p>
+<ol>
+<li>A valid account is entered and returned.</li>
+<li>A non-numeric account is entered, and a ValueError exception is raised.</li>
+<li>A numeric account is entered but does not exist, and an Exception is raised.</li>
+</ol>
+<ol>
+<ol>
+<li>Write a test for the <code>get_account</code> function that verifies that when a valid account number is entered, it is returned.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: '123456'</li>
+<li>Expected output: 123456</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+    with patch("builtins.input") as mock_input:
+        mock_input.side_effect = ["123456"]
+                        </code></pre>
+<ol>
+<ol>
+<ul>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>get_account</code> function that verifies that a ValueError exception is raised when a non-numeric account is entered.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>User input: 'non_numeric_data'</li>
+<li>Expected output: Exception: 'Invalid account number. Please enter a valid integer account number.'</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+with patch("builtins.input") as mock_input:
+    mock_input.side_effect = ["non_numeric_data"]
+                        </code></pre>
+<ol>
+<ol>
+<ul>
+<li>In your assert statement, assert that the exception is being raised based on the value 'mocked' as user input. You will also need to assert that the correct message was included in the raised exception:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+with self.assertRaises(Exception) as context:
+    get_account()
+
+self.assertEqual(str(context.exception), "Expected error message.")
+                        </code></pre>
+<ol>
+<ol>
+<ul>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>get_account</code> function that verifies that an Exception is raised when an account is entered that does not exist in the ACCOUNTS dictionary.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>User input: '112233'</li>
+<li>Expected output: Exception: 'Account number does not exist.'</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+with patch("builtins.input") as mock_input:
+    mock_input.side_effect = ["112233"]
+                        </code></pre>
+<ol>
+<ol>
+<ul>
+<li>In your assert statement, assert that the exception is being raised based on the value 'mocked' as user input. In the example below, replace 'TypeOfException' with the actual exception thrown (e.g. ValueError, Exception, etc..)</li>
+<li>You will also need to assert that the correct message was included in the raised exception:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+with self.assertRaises(TypeOfException) as context:
+    get_account()
+
+self.assertEqual(str(context.exception), "Expected error message.")
+                        </code></pre>
+<ol>
+<ul>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+<ul>
+<li>Run your tests in your terminal:</li>
+</ul>
+<pre><code class="bash">
+python -m unittest -v tests/test_chatbot.py
+                    </code></pre>
+<p><b>Ensure all tests pass before proceeding on to the next step.</b></p>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="get_amount">
+<h3>4. Create function: get_amount</h3>
+<h4>Write the function:</h4>
+<p>In the <i>chatbot.py</i> file, implement the <code>get_amount</code> function to prompt the user for the amount to deposit and return it as a float.</p>
+<ul>
+<ul>
+<li><code>get_amount()-&gt;float</code>:</li>
+<ul>
+<li>The <code>get_amount</code> function should not take any parameters.</li>
+<li>The <code>get_amount</code> function should return a float.</li>
+<li>The <code>get_amount</code> function raises the ValueError exception with two different error messages.</li>
+<li>The <code>get_amount</code> function wil prompt the user for an amount. If a <b>valid</b> amount is entered, it is returned. If an <b>invalid</b> amount is entered, an exception will be raised. An amount is considered <b>valid</b> if it is numeric AND greater than zero.</li>
+</ul>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Prompt the user to enter an amount.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Enter the transaction amount:
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Using a try/except block in which the exception being caught is a <code>ValueError</code> exception:
+<ul>
+<li>Attempt to parse the amount entered by the user to a float.</li>
+<li>If an exception occurs during the attempted parse, raise a <b>ValueError</b> with a message indicating that the amount must be numeric:
+<pre><code class="console">
+Invalid amount. Amount must be numeric.
+                                    </code></pre>
+</li>
+</ul>
+</li>
+<li>Determine whether the amount is a positive value (zero is NOT permitted).</li>
+<li>If the amount is zero or negative, raise a <b>ValueError</b> xception with a message indicating that the amount must be positive:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Invalid amount. Please enter a positive number.
+                            </code></pre>
+<ul>
+<ul>
+<li>As a final line of code in this function, return the amount (parsed as a float). This return will execute as long as no exceptions were raised during the execution of this function.</li>
+<li>Include an appropriate docstring with a function description, parameter list, return description and any exceptions raised.</li>
+</ul>
+</ul>
+<h4>Write the test(s):</h4>
+<p>In the <i>test_chatbot.py</i> file, import your new function:</p>
+<pre><code class="python">
+from src.chatbot import get_account, get_amount
+                </code></pre>
+<p>Think about the possible outcomes for get_amount:</p>
+<ol>
+<li>A valid amount is entered and returned.</li>
+<li>A non-numeric amount is entered, and a ValueError exception is raised.</li>
+<li>A numeric amount is entered but is negative, and a ValueError exception is raised.</li>
+</ol>
+<ol>
+<ol>
+<li>Write a test for the <code>get_amount</code> function that verifies that when a valid amount is entered, it is returned.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: '500.01'</li>
+<li>Expected output: 500.01</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>get_amount</code> function that verifies that a ValueError exception is raised when a non-numeric amount is entered.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>User input: 'non_numeric_data'</li>
+<li>Expected output: ValueError: 'Invalid amount. Amount must be numeric.'</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+<li>In your assert statement, assert that the exception is being raised based on the value 'mocked' as user input.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<li>Write a test for the <code>get_amount</code> function that verifies that a ValueError exception is raised when a zero or negative amount is entered.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>User input: '0'</li>
+<li>Expected output: ValueError: 'Invalid amount. Please enter a positive number.'</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+<li>In your assert statement, assert that the exception is being raised based on the value 'mocked' as user input.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+<ul>
+<li>Run your tests in your terminal:</li>
+</ul>
+<pre><code class="bash">
+python -m unittest -v tests/test_chatbot.py
+                    </code></pre>
+<p><b>Ensure all tests pass before proceeding on to the next step.</b></p>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="get_balance">
+<h3>5. Create function: get_balance</h3>
+<h4>Write the function:</h4>
+<p>In the <i>chatbot.py</i> file, implement a function called <code>get_balance</code>. This function will retrieve the balance of a specified account.</p>
+<ul>
+<ul>
+<li><code>get_balance(account: int) -&gt; str</code>:</li>
+<ul>
+<li>The <code>get_balance</code> function should receive an integer parameter representing the account number.</li>
+<li>The <code>get_balance</code> function should return a string.</li>
+<li>The <code>get_balance</code> function raises an Exception.</li>
+</ul>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Determine whether the account number exists in the ACCOUNTS dictionary.</li>
+<ul>
+<li>If the account number does not exist, raise an Exception with the following message:</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Account number does not exist.
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Retrieve the value of the balance from the ACCOUNTS dictionary based account parameter.</li>
+<li>Return a string message which includes the account number along with its corresponding balance. Example:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Your current balance for account 123456 is $1,000.00.         
+                        </code></pre>
+<ul>
+<ul>
+<li>Include an appropriate docstring with a function description, parameter list, and return description.</li>
+</ul>
+</ul>
+<h4>Write the test(s):</h4>
+<p>In the <i>test_chatbot.py</i> file, import your new function to test:</p>
+<pre><code class="python">
+from src.chatbot import get_account, get_amount, get_balance
+                </code></pre>
+<p>Think about the possible outcomes for get_balance:</p>
+<ol>
+<li>A string containing a phrase including the correct balance is returned.</li>
+<li>The account number does not exist, and an Exception is raised.</li>
+</ol>
+<ol>
+<ol>
+<li>Write a test for the <code>get_balance</code> function that verifies the correct value is returned.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 123456</li>
+<li>Expected output: 'Your current balance for account 123456 is $1,000.00.'</li>
+</ul>
+<li>You will need to provide a value for the input to this function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<li>Write a test for the <code>get_balance</code> function that verifies that an Exception is raised when an account does not exist in the ACCOUNTS dictionary.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 112233</li>
+<li>Expected output: Exception: 'Account number does not exist.'</li>
+</ul>
+<li>In your assert statement, assert that the Exception is being raised.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+</ul>
+</ol>
+<ul>
+<li>Run your tests in your terminal:</li>
+</ul>
+<pre><code class="bash">
+python -m unittest -v tests/test_chatbot.py
+                </code></pre>
+<p><b>Ensure all tests pass before proceeding on to the next step.</b></p>
+</section>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+<section id="make_deposit">
+<h3>6. Create function: make_deposit</h3>
+<h4>Write the function:</h4>
+<p>In the <i>chatbot.py</i> file, implement a function called <code>make_deposit</code>. This function update the balance of the specified account by adding the value of the amount to the account's balance.</p>
+<ul>
+<ul>
+<li><code>make_deposit(account: int, amount: float) -&gt; str</code>:</li>
+<ul>
+<li>The <code>make_deposit</code> function should receive two parameters:
+<ul>
+<li>An integer parameter representing the account number.</li>
+<li>A float parameter representing the amount of the deposit.</li>
+</ul>
+</li>
+<li>The <code>make_deposit</code> function should return a string.</li>
+<li>The <code>make_deposit</code> function raises the following exceptions:
+<ul>
+<li>Exception</li>
+<li>ValueError</li>
+</ul>
+</li>
+<li>Determine whether the account number exists in the ACCOUNTS dictionary.</li>
+<li>If the account number does not exist, raise an Exception with the following message:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Account number does not exist.
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Evaluate the value of the amount parameter.</li>
+<li>If the amount parameter is not greater than zero, raise a ValueError Exception with the following message:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Invalid Amount. Amount must be positive.
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Retrieve the value of the balance from the ACCOUNTS dictionary based account parameter.</li>
+<li>Add the deposit amount to the balance and update the account's balance in the bank ACCOUNTS dictionary.</li>
+<li>Return a string message which indicates a successfuly deposit has taken place along with the deposit details. Example:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+You have made a deposit of $1,500.01 to account 123456.         
+                        </code></pre>
+<ul>
+<ul>
+<li>Include an appropriate docstring with a function description, parameter list, and return description.</li>
+</ul>
+</ul>
+<h4>Write the test(s):</h4>
+<p>In the <i>test_chatbot.py</i> file, import your new function to test:</p>
+<pre><code class="python">
+from src.chatbot import get_account, get_amount, get_balance, make_deposit
+                </code></pre>
+<p>Think about the possible outcomes for make_deposit:</p>
+<ol>
+<li>The balance of the specified account is correctly updated.</li>
+<li>A string is returned containing a phrase indicating a successful deposit has taken place.</li>
+<li>The account number received does not exist, and an Exception is raised.</li>
+<li>A numeric amount is received but is negative, and a ValueError exception is raised.</li>
+</ol>
+<ol>
+<ol>
+<li>Write a test for the <code>make_deposit</code> function that verifies the balance is correctly updated.</li>
+<ul>
+<li>For this test, it will be necessary to initialize a record in the ACCOUNTS dictionary to an initial value. That way, other tests which update the ACCOUNTS dictionary will not impact this test:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+account_number = 123456
+ACCOUNTS[account_number]["balance"] = 1000.0
+                    </code></pre>
+<ol>
+<ol>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 123456, amount = 1500.01</li>
+<li>Expected result: Account balance of 2500.01</li>
+</ul>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<ul>
+<li>You will need to provide values for the inputs to this function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>make_deposit</code> function that verifies the correct value is returned.</li>
+<ul>
+<li>For this test, it will be necessary to initialize a record in the ACCOUNTS dictionary to an initial value. That way, other tests which update the ACCOUNTS dictionary will not impact this test:</li>
+</ul>
+</ol>
+</ol>
+<pre><code class="python">
+account_number = 123456
+ACCOUNTS[account_number]["balance"] = 1000.0
+                    </code></pre>
+<ol>
+<ol>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 123456, amount = 1500.01</li>
+<li>Expected output: 'You have made a deposit of $1,500.01 to account 123456.'</li>
+</ul>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<ul>
+<li>You will need to provide values for the inputs to this function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>make_deposit</code> function that verifies an Exception is raised when the account does not exist.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 112233, amount = 1500.01</li>
+<li>Expected result: Exception "Account number does not exist."</li>
+</ul>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<ul>
+<li>You will need to provide values for the inputs to this function.</li>
+<li>In your assert statement, assert that the Exception is being raised.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>make_deposit</code> function that verifies a ValueError is raised when the amount is less than zero.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: account = 123456, amount = -50.01</li>
+<li>Expected result: ValueError "Invalid Amount. Amount must be positive."</li>
+</ul>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ul>
+<li>You will need to provide values for the inputs to this function.</li>
+<li>In your assert statement, assert that the ValueError exception is being raised.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+<ul>
+<li>Run your test in your terminal:</li>
+</ul>
+<pre><code class="bash">
+python -m unittest -v tests/test_chatbot.py
+                    </code></pre>
+<p><b>Ensure all tests pass before proceeding on to the next step.</b></p>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="get_task">
+<h3>7. Create function: user_selection</h3>
+<h4>Write the function:</h4>
+<p>In the <i>chatbot.py</i> file, implement the <code>user_selection</code> function to prompt the user for their selction and if valid, return it.</p>
+<ul>
+<ul>
+<li><code>user_selection()-&gt;str</code>:</li>
+<ul>
+<li>The <code>user_selection</code> function should not take any parameters.</li>
+<li>The <code>user_selection</code> function should return a string representing the user's selected task.</li>
+<li>The <code>user_selection</code> function raises the ValueError exception.</li>
+<li>The <code>user_selection</code> function should prompt the user to enter their desired task allowing for uppercase or lowercase characters. If a <b>valid</b> user selection is provided, it is returned. If an <b>invalid</b> user selection is provided, a ValueError exception will be raised. A user selection is considered <b>valid</b> if it's lowercase value resides in the <b>VALID_TASKS</b> list.</li>
+</ul>
+</ul>
+</ul>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Prompt the user to enter their selection:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+What would you like to do (balance/deposit/exit)? 
+                        </code></pre>
+<ul>
+<ul>
+<ul>
+<li>Ensure their selection is converted to lowercase.</li>
+<li>Validate the user's selection, ensuring that the task is one of VALID_TASKS.</li>
+<li>If the task entered is not valid, raise an Exception with the following message:</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="console">
+Invalid task. Please choose balance, deposit, or exit.
+                        </code></pre>
+<ul>
+<ul>
+<li>As a final line of code in this function, return the user's lowercase selection. This return will execute as long as no expcetions were raised during the execution of this function.</li>
+<li>Include an appropriate docstring with a function description, parameter list, return description and any exceptions raised.</li>
+</ul>
+</ul>
+<h4>Write the test(s):</h4>
+<p>In the <i>test_chatbot.py</i> file, import your new function:</p>
+<pre><code class="python">
+from src.chatbot import get_account, get_amount, get_balance, make_deposit, user_selection
+                </code></pre>
+<p>Think about the possible outcomes for user_selection:</p>
+<ol>
+<li>A valid user selection is entered in all lowercase and returned.</li>
+<li>A valid user selection is entered in uppercase or mixed-case and returned.</li>
+<li>An invalid user selection is entered, and a ValueError exception is raised.</li>
+</ol>
+<ol>
+<ol>
+<li>Write a test for the <code>user_selection</code> function that verifies that when a valid lowercase user selection is entered, it is returned.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: balance</li>
+<li>Expected output: balance</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<ol>
+<li>Write a test for the <code>user_selection</code> function that verifies that when a valid user selection is entered using uppercase or mixed-case, it is returned.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>Input: DEPOSIT</li>
+<li>Expected output: deposit</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+</ol>
+<br>
+<ol>
+<li>Write a test for the <code>user_selection</code> function that verifies that a ValueError exception is raised when an invalid selection is entered.</li>
+<ul>
+<li>Example test scenario:</li>
+<ul>
+<li>User input: 'invalid_selection'</li>
+<li>Expected output: Exception: 'Invalid task. Please choose balance, deposit, or exit.'</li>
+</ul>
+<li>You will need to use <code>patch ('builtins.input')</code> to mock the user's response to <code>input</code> function:</li>
+<li>In your assert statement, assert that the exception is being raised based on the value 'mocked' as user input.</li>
+<li>You will also need to assert that the correct message was included in the raised exception.</li>
+<li>Remember to organize your test into <code># arrange</code>, <code># act</code> and <code># assert</code> sections.</li>
+</ul>
+</ol>
+<ul>
+<li>Run your tests in your terminal:</li>
+</ul>
+<pre><code class="bash">
+python -m unittest -v tests/test_chatbot.py
+                    </code></pre>
+<p><b>Ensure all tests pass before proceeding on to the next step.</b></p>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="perform_task">
+<h3>8. Verify all Unit Tests</h3>
+<p>At this point, all unit tests should pass with the following output:</p>
+<pre><code class="console">
+test_get_account_account_does_not_exist (tests.test_chatbot.ChatbotTests.test_get_account_account_does_not_exist) ... ok
+test_get_account_non_numeric_account (tests.test_chatbot.ChatbotTests.test_get_account_non_numeric_account) ... ok
+test_get_account_valid_account (tests.test_chatbot.ChatbotTests.test_get_account_valid_account) ... ok
+test_get_amount_negative (tests.test_chatbot.ChatbotTests.test_get_amount_negative) ... ok
+test_get_amount_non_numeric (tests.test_chatbot.ChatbotTests.test_get_amount_non_numeric) ... ok
+test_get_amount_valid_amount (tests.test_chatbot.ChatbotTests.test_get_amount_valid_amount) ... ok
+test_get_balance_account_does_not_exist (tests.test_chatbot.ChatbotTests.test_get_balance_account_does_not_exist) ... ok
+test_get_balance_correct (tests.test_chatbot.ChatbotTests.test_get_balance_correct) ... ok
+test_make_deposit_account_does_not_exist (tests.test_chatbot.ChatbotTests.test_make_deposit_account_does_not_exist) ... ok
+test_make_deposit_correct_balance (tests.test_chatbot.ChatbotTests.test_make_deposit_correct_balance) ... ok
+test_make_deposit_correct_output (tests.test_chatbot.ChatbotTests.test_make_deposit_correct_output) ... ok
+test_make_deposit_negative (tests.test_chatbot.ChatbotTests.test_make_deposit_negative) ... ok
+test_user_selection_invalid (tests.test_chatbot.ChatbotTests.test_user_selection_invalid) ... ok
+test_user_selection_valid_lowercase (tests.test_chatbot.ChatbotTests.test_user_selection_valid_lowercase) ... ok
+test_user_selection_valid_wrong_case (tests.test_chatbot.ChatbotTests.test_user_selection_valid_wrong_case) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.007s
+
+OK
+                </code></pre>
+</section>
+<section id="chatbot">
+<h3>9. chatbot Function</h3>
+<h4>Given is a starting point to the chatbot Function:</h4>
+<p>In the <i>chatbot.py</i> file, modify the given <code>chatbot</code> function as follows.</p>
+<ul>
+<ul>
+<li><code>chatbot()</code>:</li>
+<ul>
+<li>The <code>chatbot</code> function is currently commented out. Remove the triple quotation marks (""") at the begining and end of the function.</li>
+<li>Locate the following placeholder and write code based on the placeholder instructions.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="python">
+## CALL THE user_selection FUNCTION HERE 
+## CAPTURING THE RESULTS IN A VARIABLE CALLED
+## selection:                      
+                        </code></pre>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Locate the following placeholder and write code based on the placeholder instructions.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="python">
+## CALL THE get_account FUNCTION HERE
+## CAPTURING THE RESULTS IN A VARIABLE 
+## CALLED account:                  
+                        </code></pre>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Locate the following placeholder and write code based on the placeholder instructions.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="python">
+## CALL THE get_balance FUNCTION HERE
+## PASSING THE account VARIABLE DEFINED 
+## ABOVE, AND PRINT THE RESULTS:                
+                        </code></pre>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Locate the following placeholder and write code based on the placeholder instructions.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="python">
+## CALL THE get_amount FUNCTION HERE
+## AND CAPTURE THE RESULTS IN A VARIABLE 
+## CALLED amount:                
+                        </code></pre>
+<br>
+<ul>
+<ul>
+<ul>
+<li>Locate the following placeholder and write code based on the placeholder instructions.</li>
+</ul>
+</ul>
+</ul>
+<pre><code class="python">
+## CALL THE make_deposit FUNCTION HERE PASSING THE 
+## VARIABLES account AND amount DEFINED ABOVE AND 
+## PRINT THE RESULTS:          
+                        </code></pre>
+</section>
+<section>
+<h3>10. Main Guard</h3>
+<p>A main guard has been written for the <i>chatbot.py</i> file such that the <code>chatbot()</code> function will only execute when the file containing the functions is not imported.</p>
+<ul>
+<li>Uncomment the given main guard:</li>
+</ul>
+<pre><code class="python">
+if __name__ == "__main__":
+    chatbot()
+                </code></pre>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>11. Integration Test</h3>
+<p>Now that all of the tests have successfully run, the chatbot function (which calls each of the tested functions) can be run.</p>
+<p>Follow the prompts to interact with the chatbot and perform balance checks or make deposits.</p>
+<p>If the chatbot program did not run as expected, but all of your unit tests passed, then the failure is a result of the integration. If that is the case, the problem lies in the <code>chatbot</code> function itself. Seek assistance from your instructor if this is the case.</p>
+<p>Below is a sample run of the chatbot which makes balance inquiries, deposits, as well as handles user errors.</p>
+<pre><code class="console">
+Welcome! I'm the PiXELL River Financial Chatbot!  Let's get chatting!
+What would you like to do (balance/deposit/exit)? withdraw
+Invalid task. Please choose balance, deposit, or exit.
+What would you like to do (balance/deposit/exit)? BALANCE
+Please enter your account number: abcdef 
+Account number must be a whole number.
+Please enter your account number: 112233
+Account number does not exist.
+Please enter your account number: 123456
+Your current balance for account 123456 is $1,000.00.
+What would you like to do (balance/deposit/exit)? DePoSit
+Please enter your account number: abcdef
+Account number must be a whole number.
+Please enter your account number: 112233
+Account number does not exist.
+Please enter your account number: 123456
+Please enter an amount: abcdef
+Invalid amount. Amount must be numeric.
+Please enter an amount: -50
+Invalid amount. Please enter a positive number.
+Please enter an amount: 50
+You have made a deposit of $50.00 to account 123456.
+What would you like to do (balance/deposit/exit)? balance
+Please enter your account number: 123456
+Your current balance for account 123456 is $1,050.00.
+What would you like to do (balance/deposit/exit)? exit
+Thank you for banking with PiXELL River Financial.               </code></pre>
+</section>
+<section>
+<h3>12. Reviewing and refining the code</h3>
+<p>Review the code and test results to identify areas for improvement or optimization.</p>
+<p>Refactor the code to improve readability, performance, or maintainability as necessary.</p>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>13. Reflection</h3>
+<p>In your README file, write a reflection on the benefits of using functions in your code. Answer the following prompts using markdown:</p>
+<pre><code class="markdown">
+# Reflection
+## 1. Identify any challenges or issues you encountered while writing your functions.
+## 2. Discuss the benefits and challenges of developing and using unit tests.
+                </code></pre>
+<p class="reminder" aria-label="Commit your changes">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+</section>
+<!-- Add more sections for additional questions -->
+<section id="submission" class="section section--topic" aria-label="Submission Guidelines">
+<h2>Submission Guidelines</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Please follow these guidelines when submitting your project:</p>
+<ul>
+<li>Push your latest committed file(s) to your GitHub repository.</li>
+<li>Submit a link to your GitHub repository on LEARN.</li>
+<li>Submit a hardcopy zipped version of your project. The zipped file should include all project files and should be named using the following format: <code>lastname_firstname_project.zip</code></li>
+<li>Add your instructor as a collaborator to your personal repository: <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository" target="_blank" rel="noopener">GitHub Instructions</a></li>
+</ul>
+<p>Here's how you can zip your project on Windows:</p>
+<ol>
+<li>Select all project files you want to include in the zip file.</li>
+<li>Right-click on one of the selected files and select "Send to" &gt; "Compressed (zipped) folder".</li>
+<li>A new zipped folder will be created with the selected files. Rename the zipped folder to follow the naming convention specified above.</li>
+</ol>
+</section>
+<section id="review-preparation" class="section section--topic" aria-label="Preparing for Face-to-Face Reviews">
+<h2>Preparing for Face-to-Face Reviews</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To make the most of the limited time available for face-to-face reviews with instructors, it's important to come prepared. Follow these guidelines to ensure an efficient and productive review session:</p>
+<ul>
+<li><strong>Have your project's GitHub repository open:</strong> Before the review, ensure that you have pushed all your latest changes to the GitHub repository. Have the repository open in your browser, ready to show the instructor.</li>
+<li><strong>Open your code in Visual Studio Code:</strong> Have your project open in Visual Studio Code with all relevant files easily accessible. Familiarize yourself with the key parts of your code so you can quickly navigate and discuss it with the instructor.</li>
+<li><strong>Prepare a list of specific questions or concerns:</strong> If you have any doubts or need clarification on specific topics, prepare a list of questions or concerns beforehand. This will help you make the most of the limited time available during the review session.</li>
+<li><strong>Be ready to explain your code and thought process:</strong> Instructors may ask you about your code, the decisions you made, and your overall approach to the assignment. Be prepared to discuss your work and explain your reasoning.</li>
+<li><strong>Have a notepad and pen handy:</strong> Take notes during the review session to remember key points, feedback, and any follow-up actions you need to take.</li>
+</ul>
+<p>Following these guidelines will help ensure a productive face-to-face review session and allow both you and your instructor to make the most of the time available.</p>
+</section>
+<footer><!-- The following scripts are needed to apply the syntax highlighting to the page -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+                hljs.highlightAll();
+            </script></footer></body></html>

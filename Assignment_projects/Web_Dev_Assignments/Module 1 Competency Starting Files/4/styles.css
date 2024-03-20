@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Hedvig+Letters+Sans&family=Inika:wght@400;700&family=Marko+One&family=Roboto&family=Rowdies&family=Saira&display=swap');
+/********w*************
+
+    Competency 4
+    Name: 
+    Date:
+    Description:
+
+**********************/
+
+body{
+	background-image: url("images/background.jpg");
+	font-family: 'Hedvig Letters Sans', sans-serif;
+}
+
+table {
+	border: 2px solid black;
+	background-color: #ad9d6d;
+	color: #ddd;
+	width: 80%;
+	margin: 25px auto;
+	padding: 10px;
+	border: 4px solid black;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px #aaa;
+}
+
+table caption {
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	color: #777;
+}
+thead {
+	font-weight: bold;
+	background-color: #959595;
+}
+
+tr:nth-child(odd){
+	background-color: rgba(0, 128, 0, 0.529);
+}
+
+tr:nth-child(even){
+	background-color: rgba(66, 66, 66, 0.49);
+}
+
+tr:hover{
+	background-color: blueviolet;
+}

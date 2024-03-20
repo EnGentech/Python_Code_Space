@@ -1,0 +1,246 @@
+/********w*************
+    
+    Project 1 Stylesheet
+    Name:
+    Date:
+    Description:
+
+**********************/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+html,
+body,
+section,
+p,
+header,
+nav,
+footer,
+div,
+article,
+aside,
+ol,
+ul,
+li,
+h1,
+h6 {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #e6e6e6;
+}
+
+#container {
+	width: 810px;
+	background-color: #fff;
+	border-radius: 8px;
+	margin: 10px auto;
+	padding: 10px;
+	box-shadow: 1px 1px 2px #a2a2a2, -1px -1px 2px #a2a2a2;
+}
+
+a{
+	text-decoration: none;
+}
+
+.topItemsContent{
+	display: flex;
+	height: 50px;
+}
+
+.topImage{
+	flex: 0.8;
+}
+
+.topLinks{
+	flex: 3;
+}
+
+.topLinks ul li, .navBarLinks ul li, .footer ul li{
+	display: inline-block;
+	margin: 30px 0px 0px 0px;
+	padding: 0px 8px 0px 8px;
+	border-right: 1px solid blue;
+}
+
+a:hover{
+	color: red !important;
+	border-bottom: 1px solid red;
+}
+
+.navBarLinks a:hover{
+	color: red;
+}
+
+.lastLink {
+	padding-right: 0px !important;
+	border-right: none !important;
+}
+
+.topLinks ul li a{
+	text-decoration: none;
+}
+
+.topSearchBar{
+	flex: 1;
+}
+
+.topSearchBar input[type="text"]{
+	width: 57%;
+	margin: 20px 0px 0px 0px;
+}
+
+.centerImage{
+	background: url(images/headerBackground.jpg);
+	margin-top: 0px;
+	background-repeat: no-repeat;
+	height: 190px;
+	color: white;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+#tagCap h1{
+	padding: 20px;
+	margin: 0px;
+	letter-spacing: 10px;
+	font-size: xx-large;
+}
+
+#tagButtom h2{
+	font-style: italic;
+	text-align: end;
+	margin: 70px 30px 0px 0px;
+	letter-spacing: 1px;
+}
+
+.navBarLinks{
+	text-align: center;
+	background: linear-gradient(#87c0f4, #1272a5);
+	height: 30px;
+}
+
+.navBarLinks ul li{
+	margin-top: 5px;
+	font-family: "Roboto", sans-serif;
+	border-right: 2px solid #01527a;
+}
+
+.navBarLinks ul li a{
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.mainContent{
+	display: flex;
+	font-family: "Roboto", sans-serif;
+}
+
+.leftContent{
+	width: 600px
+}
+
+.leftContent a{
+	color: black;
+}
+
+.leftContent ul{
+	margin-right: 20px;
+}
+
+.leftContent ul li{
+	font-weight: bold;
+	border-bottom: 2px solid #b7b7b7;
+	background: linear-gradient(#efefef, #cccbcb);
+	padding: 8px;
+	font-size: 0.8em;
+	list-style-position: inside;
+	width: 105%;
+}
+
+#noListStyle{
+	list-style-type: none;
+}
+
+#homeNav{
+	font-size: small;
+	margin-top: 5px;
+}
+
+.rightContent p{
+	line-height: 1.5em;
+}
+
+.rightContent a{
+	color: navy;
+	font-style: italic;
+}
+
+.rightContent h3{
+	border-bottom: 2px solid #dddddd;
+}
+
+.roverImage{
+	float: right;
+	border: 1px solid black;
+	padding: 5px;
+	width: 255px;
+}
+
+.roverImage p{
+	font-size: small;
+}
+
+.innerLink{
+	margin-left: 30px;
+}
+
+.leftButtom{
+	margin-top: 40px;
+	border-top: 2px solid #dddddd;
+	padding-top: 10px;
+	width: 95%
+}
+
+.leftButtom img{
+	float: right;
+}
+
+.leftButtom p{
+	font-size: small;
+	color: rgb(115, 111, 111);
+}
+
+.footer{
+	text-align: center;
+	font-family: "Roboto", sans-serif;
+	margin-top: 50px;
+}
+
+.footer ul li{
+	border-right: 1.5px solid black;
+	font-size: small;
+}
+
+.footer p{
+	font-size: small;
+}
+
+#gray{
+	color: rgb(113, 108, 108);
+	text-decoration: underline;
+	text-decoration-color: white;
+}
+
+#change{
+	color: black;
+}
+
+#hideThis{
+	position: absolute;
+	color: transparent;
+}

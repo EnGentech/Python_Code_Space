@@ -1,0 +1,12 @@
+import requests
+
+# Raw URL of the file
+raw_url = 'https://raw.githubusercontent.com/pinkcode123/back_end-programming-/main/list-dict_if/0-zip_me.py'
+
+response = requests.get(raw_url)
+
+if response.status_code == 200:
+    code_obtained = response.text
+    exec(code_obtained)
+else:
+    print(f"Error: {response.status_code}")

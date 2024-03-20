@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+
+        .content{
+            border: 1px solid gray;
+            width: 250px;
+            height: 300px;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px gray;
+            padding: 20px
+        }
+
+        #circle{
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            border: 1px solid gray; 
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"]{
+            padding: 5px;
+            border: 1px solid gray;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]{
+            width: 60%;
+            background-color: darkblue;
+            color:white;
+            border-radius: 60px;
+            border:none;
+            padding: 2px;
+            cursor: pointer;
+        }
+    </style>  
+</head>
+<body>
+    
+    <div class="container">
+        <div class="content" id="changeMode">
+            <section class="top">
+                <center><input type="text" id="color" placeholder="enter a color name"></center>
+            </section>
+
+            <section id="circle">
+
+            </section>
+
+            <section class="submit">
+                <center><input type="submit" value="Submit" id="submit"></center>
+            </section>
+        </div>
+
+
+      
+        
+    </div>
+  <br>
+    <center>
+         <button id="dark_mode">
+            Dark mode
+        </button>
+
+        <button id="white_mode">
+            White mode
+        </button>
+    </center>
+
+
+
+
+
+
+
+
+    <script src="script.js">
+        
+    </script>
+</body>
+</html>

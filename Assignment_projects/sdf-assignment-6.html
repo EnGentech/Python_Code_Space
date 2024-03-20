@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 6</title>
+        <link rel="stylesheet" href="https://rrc-ace-org-test.github.io/Template-Styles/style.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css">
+        <!-- highlight.js style demos https://highlightjs.org/static/demo/ -->
+    </head><body id="content"><header>
+<h1>Code Reuse: Defining and Using Classes</h1>
+<p>In this assignment, you will explore the use of classes as a means to encapsulate related data into a single item (object). Each object will have its own set of data items (attributes) and will have the ability to perform operations (methods) on those data items. Classes are a foundational component of Object-Oriented programming, and understanding how to create and use (and re-use) classes is an essential skill for a programmer.</p>
+</header>
+<section id="table-contents" class="section section--topic" aria-label="Table of Contents">
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#overview">Assignment Overview</a></li>
+<li><a href="#tools">Tools You'll Need</a></li>
+<li><a href="#setup">Project Setup</a></li>
+<li><a href="#details">Assignment Details</a></li>
+<li><a href="#submission">Submission Guidelines</a></li>
+<li><a href="#review-preparation">Preparing for Face-to-Face Reviews</a></li>
+</ol>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="overview" class="section section--topic" aria-label="Assignment Overview">
+<h2>Assignment Overview</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>In this assignment you will build a class to manage mortgage data. The class will include the common components of any Python class such as the <code>__init__</code>, <code>__repr__</code> and <code>__str__</code> along with accessors and mutators (getters and setters). The class will also contain functionality that will determine the value of a mortgage payment based on various attribute values such as mortgage amount, interest rate, amortization and payments per year. You will verify correct functionality of your class by writing a series of unit tests. Finally, you will utilize your tested class in a program which processes mortgage data as a batch.</p>
+</section>
+<!-- Standard Tools Needed Section -->
+<section id="tools" class="section section--topic" aria-label="Tools You'll Need">
+<h2>Tools You'll Need</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To complete this assignment, you will need the following tools:</p>
+<ul>
+<li>A text editor (such as Visual Studio Code)</li>
+<li>A terminal (such as Terminal on Mac or PowerShell on Windows)</li>
+<li>Git</li>
+</ul>
+<p>If you don't already have these tools installed on your computer, you can download or access them from the following links:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a></li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+<li><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a></li>
+</ul>
+</section>
+<!-- Standard Git Setup Section -->
+<section id="setup" class="section section--topic" aria-label="Project structure and Git setup details">
+<h2>Project Setup</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Before we start the assignment, it's important to organize your project and get familiar with a powerful tool called version control. Good organization of your project files helps you keep track of your work, makes it easier to find specific files, and can improve overall workflow efficiency. With version control, you can keep track of all changes you make to your code, work together with other people on the same project, and even go back to an earlier version of your code if needed. So, let's get started and set up your project!</p>
+<section>
+<h3>Instructions:</h3>
+<p>Throughout the instructions, you will see placeholders in square braces, e.g. [PROJECT_NAME]. Please replace these placeholders with meaningful values before executing the commands. <br><strong>For example:</strong> <br>Replace [PROJECT_NAME] with the desired name for your project directory.</p>
+</section>
+<section>
+<h3>1. Download the Given Project Directory:</h3>
+<p>The directory structure as well as some given files are included in this assignment. Download and extract the given directory structure into your Assignments directory.</p>
+<ul>
+<li><a href="assignment_starters/a6/sdf_assignment_6.zip?isCourseFile=true" target="_self">sdf_assignment_6</a></li>
+</ul>
+<p>Following this step, your directory structure should be as follows:</p>
+<pre><code class="plaintext">
+sdf_assignment_6/
+    data/
+        pixell_river_mortgages.txt
+    mortgage/
+        __init__.py
+        mortgage.py
+        pixell_lookup.py
+    tests/
+        test_mortgage.py
+    main.py    
+    README.md
+    .gitignore
+                </code></pre>
+<p></p>
+</section>
+<section>
+<h3>2. Initialize a new Git repository:</h3>
+<p>This step is about setting up a Git repository for your project so you can start tracking changes to your code.</p>
+<p>Change the current directory to the project directory (the directory containing the README.md file):</p>
+<pre><code class="bash">
+cd [PROJECT_NAME]
+            </code></pre>
+<p>Initialize the Git repository:</p>
+<pre><code class="bash">
+git init
+            </code></pre>
+<p>The <strong>git init</strong> command is used to create a new Git repository in the current directory.</p>
+</section>
+<section>
+<h3>3. Create a new repository on GitHub:</h3>
+<p>Follow the instructions on GitHub to create a new repository for your project: <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository" target="_blank" rel="noopener">GitHub Documentation</a></p>
+<p>Set your repository to Private.</p>
+<p>Leave the other options at their default selections. That is:</p>
+<ul>
+<li>Do not create a README.md file (the README.md file is given).</li>
+<li>Do not create a .gitignore file at this time (the .gitignore file is given).</li>
+<li>Do not choose a license.</li>
+</ul>
+</section>
+<section>
+<h3>4. Connect the local repository to the remote repository on GitHub:</h3>
+<p>This step is about setting up a connection between your local Git repository and the remote repository on GitHub so you can push and pull changes between the two.</p>
+<p>In the terminal/PowerShell, add the remote repository to your local repository:</p>
+<pre><code class="bash">
+git remote add origin https://github.com/[YOUR_GITHUB_USERNAME]/[PROJECT_NAME].git
+            </code></pre>
+<p>Replace [YOUR_GITHUB_USERNAME] and [PROJECT_NAME] with the appropriate values.</p>
+<p>The <strong>git remote add</strong> command is used to add the remote repository to your local repository.</p>
+</section>
+<section>
+<h3>5. Create a new file or use a provided file:</h3>
+<p>In the terminal/PowerShell, run the following command:</p>
+<pre><code class="bash">
+code .
+            </code></pre>
+<p>The <strong>code .</strong> command is used to open the project directory in Visual Studio Code.</p>
+<p>Some basic Python documentation exists in the given python files. As you work through the assignment, ensure you update the documentation as necessary.</p>
+<p>The README.md file for your project has been started. As you work through the assignment, ensure you update the README.md file as necessary.</p>
+<p>The .gitignore file for your assignment has been created and does not require any modificaations.</p>
+</section>
+<section>
+<h3>6. Stage and commit the changes:</h3>
+<p>After making changes to the code, you need to "stage" them for commit. This basically means telling Git which files you want to include in your next commit.</p>
+<p>Return to the terminal/PowerShell and add the files to the staging area:</p>
+<pre><code class="bash">
+git add .
+            </code></pre>
+<p>The <strong>git add</strong> command stages the changes you made to the README file.</p>
+<p>After staging the changes, you can create a commit with a message describing the changes you made.</p>
+<p>Commit the changes with a meaningful message:</p>
+<pre><code class="bash">
+git commit -m "Initial commit: Set up project directory and file structure"
+            </code></pre>
+</section>
+<section>
+<h3>7. Push the changes to the remote repository on GitHub:</h3>
+<p>This step is about pushing the changes you made to your local repository to the remote repository on GitHub.</p>
+<p>Push the changes from your local repository to the remote repository on GitHub:</p>
+<pre><code class="bash">
+git push -u origin main
+            </code></pre>
+<p>The <strong>git push</strong> command sends the changes to the remote repository under the name of the branch, in this case "main".</p>
+</section>
+</section>
+<!-- Assignment Body - All assignment specific steps are outlined here -->
+<section id="details" class="section section--topic" aria-label="Detailed assignment steps">
+<h2>Assignment Details</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a> <!-- Using sections for each question -->
+<section aria-label="question one">
+<h3>Part 1:</h3>
+<!-- User story example, you can replace the braketed content with the related content -->
+<section aria-label="User story">
+<h3>User Story</h3>
+<div class="user-story">
+<p><span>As a</span> Mortgage Loan Officer,</p>
+<p><span>I want to</span> maintain mortgage data,</p>
+<p><span>So that</span> I can recommend the best mortgage options for my clients.</p>
+</div>
+</section>
+<!-- Files will always be in italtics so students know how to recognize them --> <!--<p>You should download <i>this_file.txt</i> from LEARN</p> -->
+<section><!-- Paragraph to hold all text and code associated with a question -->
+<h3>1. Define Enumerations</h3>
+<p>The assignment will eventually receive test data in the form of a comma-delimited text file. In that test data, mortgage rates and payment frequency will be defined based on specific identifiers. These identifiers will be defined in the program using enumerations.</p>
+<h4>Mortgage Rate: Enumeration</h4>
+<p>Open the file called <i>pixell_lookup.py</i> in your code editor. Define a class called MortgageRate as an enumeration (inherited from Enum) to store the following mortgage rate options:</p>
+<ul>
+<li>FIXED_5: 0.0500</li>
+<li>FIXED_3: 0.0579</li>
+<li>FIXED_1: 0.0589</li>
+<li>VARIABLE_5: 0.0650</li>
+<li>VARIABLE_3: 0.0660</li>
+<li>VARIABLE_1: 0.0679</li>
+</ul>
+<p>Provide an appropriate docstring for your Mortgage Rate enumeration.</p>
+<h4>Payment Frequency: Enumeration</h4>
+<p>Continue with the file called <i>pixell_lookup.py</i> in your code editor. Define a class called PaymentFrequency as an enumeration (inherited from Enum) to store the following payment frequency options:</p>
+<ul>
+<li>MONTHLY: 12</li>
+<li>BI_WEEKLY: 26</li>
+<li>WEEKLY: 52</li>
+</ul>
+<p>Provide an appropriate docstring for your Payment Frequency enumeration.</p>
+<h4>Amortization: List (<u>given</u>)</h4>
+<p>A given list is provided which contains the allowable options for the length of the mortgage in years (amortization). While not an enumeration, the <i>pixell_lookup.py</i> file is an appropriate place to store this list.</p>
+<b>VALID_AMORTIZATION List</b>:
+<p>Containing the following values:</p>
+<ul>
+<li>5, 10, 15, 20, 25, 30</li>
+</ul>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>2. Define Mortgage class</h3>
+<p>Open the file called <i>mortgage.py</i> (in the mortgage directory) in your code editor. Define a class called Mortgage. This class will make use of the Enumerations and List within the <i>pixell_lookup.py</i> file, so ensure you define an appropriate import statement(s).</p>
+<p>Include an import statement to import the enumerations and list defined in the <i>pixell_lookup.py</i> file.</p>
+<pre><code class="python">
+from mortgage.pixell_lookup import MortgageRate, MortgageFrequency, VALID_AMORTIZATION
+                    </code></pre>
+<h3>3. __init__</h3>
+<p>Define the __init__ method such that the class has the following attributes:</p>
+<ul>
+<li><b>Loan Amount (float)</b>: The amount of the mortgage loan.</li>
+<li><b>Rate (MortgageRate)</b>: The annual interest rate.</li>
+<li><b>Frequency (int)</b>: The number of payments per year.</li>
+<li><b>Amortization (int)</b>: The number of years to repay the mortgage loan.</li>
+</ul>
+<p>Ensure the inputs to the __init__ have been validated as follows:</p>
+<ul>
+<li><b>Loan Amount</b>: If the incoming loan amount value is greater than 0, set the Loan Amount attribute to the incoming value. If the value is zero or negative, raise a ValueError exception indicating that the <b>Loan Amount must be positive.</b></li>
+<li><b>Rate</b>: If the incoming rate value is not an instance of the MortgageRate enum, raise a ValueError exception indicating that the <b>Rate provided is invalid.</b></li>
+<li><b>Frequency</b>: If the incoming frequency value is not an instance of the MortgageFrequency enum, raise a ValueError exception indicating that the <b>Frequency provided is invalid.</b></li>
+<li><b>Amortization</b>: If the incoming amortization value is not found in the VALID_AMORTIZATION list, raise a ValueError exception indicating that the <b>Amortization provided is invalid.</b></li>
+</ul>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>4. Define __init__ Test Cases:</h3>
+<p>Open the file called <i>test_mortgage.py</i> (found in the tests folder). This file will be used to define unit tests for the MortgagePayment class.</p>
+<p>Include import statements for:</p>
+<ul>
+<li>TestCase</li>
+<li>Mortgage</li>
+<li>MortgateRate, MortgageFrequency and VALID_AMORTIZATION</li>
+</ul>
+<pre><code class="python">
+from unittest import TestCase
+from mortgage.mortgage import Mortgage
+from mortgage.pixell_lookup import MortgageRate, MortgageFrequency, VALID_AMORTIZATION
+                    </code></pre>
+<p>Define the Unit Test class by inheriting unittest.TestCase:</p>
+<pre><code class="python">
+class MortgageTests(unittest.TestCase):
+                </code></pre>
+<p>Define Test Case methods to verify the validation of the attributes defined in the __init__ to verify expected behaviour.</p>
+<p>With 4 attributes assigned in the __init__ method, there should be at least 5 test cases. The first four tests listed below can be unit tested now.</p>
+<p>The fifth test - the test that ensure that the attributes are correctly set when valid inputs are provided - cannot be tested until the accessors for the attributes have been defined (below). For now, write the first four tests. Once the accessors have been defined you will revisit your __init__ unit tests and add the fifth test.</p>
+<ol>
+<li>A test case to ensure that the __init__ raises a ValueError when an invalid amount input value is used.</li>
+<li>A test case to ensure that the __init__ raises a ValueError when an invalid rate input value is used.</li>
+<li>A test case to ensure that the __init__ raises a ValueError when an invalid frequency input value is used.</li>
+<li>A test case to ensure that the __init__ raises a ValueError when an invalid amortization input value is used.</li>
+<li>A test case to ensure that the __init__ properly sets the attributes when valid inputs are provided.</li>
+</ol>
+<p>Run the first 4 tests defined above in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>5. Define Accessors and Mutators for Loan Amount</h3>
+<p>Return to the file called <i>mortgage.py</i>. <br>Define Accessors and Mutators for the Loan Amount attribute.</p>
+<ul>
+<li>For the Mutator, evaluate the incoming value. If the value is greater than 0, set the Loan Amount attribute to the incoming value. If the value is zero or negative, raise a ValueError exception indicating that the <b>Loan Amount must be positive.</b></li>
+<li>For the Accessor, simply return the value of the Loan Amount.</li>
+</ul>
+</section>
+<section>
+<h3>6. Define Loan Amount Accessor/Mutator Test Cases:</h3>
+<p>Return to the file called <i>test_mortgage.py</i>.</p>
+<p>Define Test Case methods to ensure the Loan Amount Accessor and Mutator work as expected. At least 3 test cases should be defined:</p>
+<ul>
+<li>Modify the Loan Amount to a negative value and verify results.</li>
+<li>Modify the Loan Amount to zero and verify results.</li>
+<li>Modify the Loan Amount to a positive value and verify results.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>7. Define Accessors and Mutators for Rate</h3>
+<p>Return to the file called <i>mortgage.py</i>. <br>Define Accessors and Mutators for the Rate attribute.</p>
+<ul>
+<li>For the Mutator, evaluate the incoming value. If the value is not an instance of the MortgageRate enum, Raise a ValueError exception indicating that the <b>Rate provided is invalid.</b></li>
+<li>For the Accessor, simply return the value of the Rate.</li>
+</ul>
+</section>
+<section>
+<h3>8. Define Rate Accessor/Mutator Test Cases:</h3>
+<p>Return to the file called <i>test_mortgage.py</i>.</p>
+<p>Define Test Case methods to ensure the Rate Accessor and Mutator work as expected. At least 2 test cases should be defined:</p>
+<ul>
+<li>Modify the Rate to one of the possible MortgageRate enum values and verify results.</li>
+<li>Modify the Rate to a value that is not of MortgageRate enum type and verify results.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>9. Define Accessors and Mutators for Frequency</h3>
+<p>Return to the file called <i>mortgage.py</i>. <br>Define Accessors and Mutators for the Frequency attribute.</p>
+<ul>
+<li>For the Mutator, evaluate the incoming value. If the value is not an instance of the MortgageFrequency enum, Raise a ValueError exception indicating that the <b>Frequency provided is invalid.</b></li>
+<li>For the Accessor, simply return the value of the Frequency.</li>
+</ul>
+</section>
+</section>
+<section>
+<h3>10. Define Frequency Accessor/Mutator Test Cases:</h3>
+<p>Return to the file called <i>test_mortgage.py</i>.</p>
+<p>Define Test Case methods to ensure the Frequency Accessor and Mutator work as expected. At least 2 test cases should be defined:</p>
+<ul>
+<li>Modify the Frequency to one of the possible MortgageFrequency values and verify results.</li>
+<li>Modify the Frequency to a value that is not of MortgageFrequency enum type and verify results.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>11. Define Accessors and Mutators for Amortization</h3>
+<p>Return to the file called <i>mortgage.py</i>. <br>Define Accessors and Mutators for the Amortization attribute.</p>
+<ul>
+<li>For the Mutator, evaluate the incoming value. Valid amortization values are found in the VALID_AMORTIZATION list.</li>
+<li>If an invalid Amortization is received, raise an exception indicating that the <b>Amortization provided is invalid</b>.</li>
+<li>For the Accessor, simply return the value of the Amortization.</li>
+</ul>
+</section>
+<section>
+<h3>12. Define Amortization Accessor/Mutator Test Cases:</h3>
+<p>Return to the file called <i>test_mortgage.py</i>.</p>
+<p>Define Test Case methods to ensure the Amortization Accessor and Mutator work as expected. At least 2 test cases should be defined:</p>
+<ul>
+<li>Modify the Amortization to one of the possible VALID_AMORTIZATION values and verify results.</li>
+<li>Modify the Amortization to a value that is not one of the VALID_AMORTIZATION values and verify results.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>13. Update the __init__ Test Cases:</h3>
+<p>Continue with the file called <i>test_mortgage.py</i>.</p>
+<p>Now that the accessors have been created for each of the class attributes, the following __init__ test case (initially discussed in Step 4 above) can now be completed.</p>
+<ul>
+<li>Write a test case to ensure that the __init__ properly sets the attributes when valid inputs are provided.</li>
+<li>Use your accessors to verify the results.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section id="calculate_payment">
+<h3>14. Define a calculate_payment method:</h3>
+<p>Return to the file called <i>mortgage.py</i>.</p>
+<p>Implement a method called <code>calculate_payment</code> to return the mortgage payment amount.</p>
+<ul>
+<li><code>calculate_payment(self) -&gt; float</code>:
+<ul>
+<ul>
+<li>Calculate the Weekly, BiWeekly or Monthly mortgage payment based on the details of the mortgage (<code>amount</code>, <code>rate</code>, <code>frequency</code> and <code>amortization</code>).</li>
+<li>This method should return the calculated payment value.</li>
+<li>Use the following formula to perform the calculation:</li>
+</ul>
+</ul>
+<img src="mortgage_payment_formula.png" alt="mortgage formula" width="400" height="333"></li>
+</ul>
+<p>Example:</p>
+<pre><code class="console">
+Loan Amount: $682,912.43
+Interest Rate: 5.89% (0.0589) (FIXED_1)
+Frequency: 12 (MONTHLY)
+Amortization: 30 (years)
+
+Payment = 4046.23 (to two decimal places)
+                </code></pre>
+</section>
+<section>
+<h3>15. Define calculate_payment test cases:</h3>
+<p>Return to the file called <i>test_mortgage_payment.py</i>.</p>
+<p>Define test cases for the calculate_payment method. These test cases should test a variety of scenarios with respect to Loan Amount, Interest Rate, Frequency and Amortization and should ensure accuracy to two decimal places. When testing calculate_payment, you may assume valid data. <br>Hints:</p>
+<ol>
+<li>Use the above example as one of your tests.</li>
+<li>Use the <code>assertAlmostEqual</code> method with a 'places' argument of 2 to compare results to 2 decimal places.</li>
+</ol>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>16. Define __str__:</h3>
+<p>Return to the file called <i>mortgage.py</i>.</p>
+<p>Define a __str__ method for the class such that the string representation of a MortgagePayment object will display as shown below (with sample data). Note the line feeds, spacing, special characters, and the formatting applied to currency and percent data:</p>
+<pre><code class="console">
+Mortgage Amount: $682,912.43
+Rate: 5.89%
+Amortization: 30
+Frequency: Monthly -- Calculated Payment: $4,046.23
+                </code></pre>
+</section>
+<section>
+<h3>17. Define __str__ test cases:</h3>
+<p>Return to the file called <i>test_mortgage_payment.py</i>.</p>
+<p>Define test cases to ensure a mortgage object's string representation is accurate. <br>Test to ensure proper display including 2 decimal places for Rate, Mortgage Amount and Calculated Payment regardless of the internal value. At least 3 test cases should be defined:</p>
+<ul>
+<li>A Test Case involving a Monthly payment.</li>
+<li>A Test Case involving a BiWeekly payment.</li>
+<li>A Test case involving a Weekly payment.</li>
+</ul>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+<section>
+<h3>18. Define __repr__:</h3>
+<p>Return to the file called <i>mortgage.py</i>.</p>
+<p>Define a __repr__ method for the class such that the representation of a MortgagePayment object will display as shown below (with sample data). Note the data is presented in raw format with no formatting or rounding.</p>
+<pre><code class="console">
+[682912.43, 0.0589, 30, 12]
+                </code></pre>
+</section>
+<section>
+<h3>19. Define __repr__ test cases:</h3>
+<p>Return to the file called <i>test_mortgage_payment.py</i>.</p>
+<p>Define a test case to ensure a mortgage object's representation (__repr__) is accurate. <br>Test to ensure proper precision for Rate and Mortgage Amount.</p>
+<p>Run the tests in your terminal:</p>
+<pre><code class="bash">
+python -m unittest -v tests/test_mortgage.py
+                    </code></pre>
+<p>Ensure all test cases execute without assertion errors before continuing.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+</section>
+<section aria-label="question two">
+<h3>Part 2:</h3>
+<section aria-label="User story">
+<h3>User Story</h3>
+<div class="user-story">
+<p><span>As a</span> Mortgage Loan Officer,</p>
+<p><span>I want to</span> process batch mortgage loan data,</p>
+<p><span>So that</span> I can quickly determine loan payment requirements.</p>
+</div>
+</section>
+<section>
+<h3>1. Incorporate Batch Processing Files</h3>
+<p>Modify the given <i>main.py</i> found in the root of your directory structure. Update the comment block at the top of the program by completing the {placeholder} values.</p>
+</section>
+<section>
+<h3>2. Edit Based on Inline Comment Instructions</h3>
+<p>Modify the given file called <i>main.py</i>. Locate placeholder comments which begin with:</p>
+<pre><code class="python">
+### REQUIREMENT
+                </code></pre>
+<p>Update the given code below each of the <code>### REQUIREMENT</code> placeholders, based on the instructions provided as inline comments.</p>
+</section>
+<section>
+<h3>3. Test Batch Processing</h3>
+<p>Run the <i>main.py</i> program.</p>
+<p>Ensure the data produced is accurate by comparing the final delimeted item in the <i>pixell_river_mortgages.txt</i> file (found in the data directory) with your own results. Exceptions should display where expected. For data that is not expected to produce an exception, the string representation of the class should display. In those cases, verify the Calculated Payment against the value supplied in the <i>pixell_river_mortgages.txt</i> file. Example:</p>
+<pre><code class="console">
+Mortgage Amount: $682,912.43
+Rate: 5.89%
+Amortization: 30
+Frequency: Monthly -- Calculated Payment: $4,046.23
+                </code></pre>
+<p>If the results produced do not match the expected values in the <i>pixell_river_mortgages.txt</i> files, revisit your earlier code and troubleshoot as necessary. If any of your original code is modified as a result of your troubleshooting, re-run all Unit Tests to verify that all tests run successfully.</p>
+<p class="reminder">✱✱✱ Save and commit your changes with a meaningful message. ✱✱✱</p>
+</section>
+</section>
+<!-- Add more sections for additional questions -->
+<section id="submission" class="section section--topic" aria-label="Submission Guidelines">
+<h2>Submission Guidelines</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>Please follow these guidelines when submitting your project:</p>
+<ul>
+<li>Push your latest committed file(s) to your GitHub repository.</li>
+<li>Submit a link to your GitHub repository on LEARN.</li>
+<li>Submit a hardcopy zipped version of your project. The zipped file should include all project files and should be named using the following format: <code>lastname_firstname_project.zip</code></li>
+<li>Add your instructor as a collaborator to your personal repository: <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository" target="_blank" rel="noopener">GitHub Instructions</a></li>
+</ul>
+<p>Here's how you can zip your project on Windows:</p>
+<ol>
+<li>Select all project files you want to include in the zip file.</li>
+<li>Right-click on one of the selected files and select "Send to" &gt; "Compressed (zipped) folder".</li>
+<li>A new zipped folder will be created with the selected files. Rename the zipped folder to follow the naming convention specified above.</li>
+</ol>
+</section>
+<section id="review-preparation" class="section section--topic" aria-label="Preparing for Face-to-Face Reviews">
+<h2>Preparing for Face-to-Face Reviews</h2>
+<a href="#table-contents" class="scrollToToc">Scroll to Table of Contents</a>
+<p>To make the most of the limited time available for face-to-face reviews with instructors, it's important to come prepared. Follow these guidelines to ensure an efficient and productive review session:</p>
+<ul>
+<li><strong>Have your project's GitHub repository open:</strong> Before the review, ensure that you have pushed all your latest changes to the GitHub repository. Have the repository open in your browser, ready to show the instructor.</li>
+<li><strong>Open your code in Visual Studio Code:</strong> Have your project open in Visual Studio Code with all relevant files easily accessible. Familiarize yourself with the key parts of your code so you can quickly navigate and discuss it with the instructor.</li>
+<li><strong>Prepare a list of specific questions or concerns:</strong> If you have any doubts or need clarification on specific topics, prepare a list of questions or concerns beforehand. This will help you make the most of the limited time available during the review session.</li>
+<li><strong>Be ready to explain your code and thought process:</strong> Instructors may ask you about your code, the decisions you made, and your overall approach to the assignment. Be prepared to discuss your work and explain your reasoning.</li>
+<li><strong>Have a notepad and pen handy:</strong> Take notes during the review session to remember key points, feedback, and any follow-up actions you need to take.</li>
+</ul>
+<p>Following these guidelines will help ensure a productive face-to-face review session and allow both you and your instructor to make the most of the time available.</p>
+</section>
+<footer><!-- The following scripts are needed to apply the syntax highlighting to the page -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+<script>
+                hljs.highlightAll();
+            </script></footer></body></html>

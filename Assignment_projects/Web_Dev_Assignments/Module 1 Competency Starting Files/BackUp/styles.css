@@ -1,0 +1,113 @@
+body{
+    margin: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: whitesmoke;
+    height: 100vh;
+    background-image: url('images/background.jpg');
+}
+
+.headDiv{
+    background-color: rgb(0, 128, 109);
+    padding-bottom: 10px;
+}
+
+.headDiv img{
+    float: left;
+    height: 70px;
+    margin-left: 20px;
+    border-radius: 50%;
+    margin-top: 1%;
+    width: 70px;
+}
+
+.header, .head_paragraph{
+    text-align: center;
+    margin: 0px;
+}
+
+.head_paragraph{
+    color: white
+}
+
+.header{
+    padding-top: 20px;
+    color: darkblue;
+    font-weight: 600;
+}
+
+.foot_content{
+    color: white;
+    font-size: small;
+    background-color: black;
+    height: 40px;
+    padding-left: 40px;
+    padding-top: 5px;
+}
+
+.main_content .title{
+    font-weight: light;
+    border: 1px solid rgba(165, 42, 42, 0.198);
+    display: inline-block;
+    width: 62%;
+    padding: 2px 30px 2px 30px;
+    border-radius: 40px;
+    background-color: rgba(128, 128, 128, 0.08);
+    box-shadow: 1px 1px 4px 1px rgb(120, 120, 120);
+    background-color: whitesmoke;
+}
+
+.main_content .title span{
+    color: rgb(0, 0, 170);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#main_content_head{
+    text-align: center;
+    padding: 20px;
+}
+
+#inn{
+    background-image: url("images/canoncp200.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin:auto;
+    width: 80%;
+    border-radius: 30px;
+    box-shadow: -1px 1px 10px 2px rgba(0, 0, 0, 0.685);
+}
+
+.article_content{
+    background-color: rgba(255, 255, 255, 0.428);
+    padding: 5px 20px 5px 20px;
+    border-radius: 30px;
+}
+
+.article_content .tag{
+    color: brown;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.2em;
+}
+
+.article_content .tag_content, .listHead{
+    line-height: 25px;
+    text-align: justify;
+}
+
+#evolImg{
+    width: 100%;
+    border-radius: 30px;
+    border-top: 1px solid black;
+}
+
+.listHead{
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.listHead span{
+    font-weight: normal;
+    font-size: 1em;
+    color: rgb(45, 45, 45);
+}
