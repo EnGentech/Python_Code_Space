@@ -5,7 +5,7 @@ from time import sleep
 
 class MyPrompt(Cmd):
     prompt = 'firstBank$ '
-    intro = "Simple command processor example."
+    intro = "Welcome to First Bank, enter run to start the app or exit to quit.".center(100)
 
     def do_run(self, arg):
         runBankApp = main.MainExec()
@@ -15,6 +15,7 @@ class MyPrompt(Cmd):
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Exiting...")
         sleep(5)
+        os.system('cls' if os.name == 'nt' else 'clear')
         return True
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 from datetime import date
+import json
 import csv
 from random import randint
 import re
@@ -36,6 +37,26 @@ class Registration:
         email = Registration.emailValidation()
         initialDeposit = Registration.validateInitialDeposit()
         accountNumber = Registration.generateAccountNumber()
+
+        # create an auth system
+        with open('auth.json', 'r') as file:
+            try:
+                storage = json.load(file)
+            except Exception:
+                storage = {}
+
+        authFile = {
+            accountNumber: {
+                'auth': None,
+                'passkey': None,
+                'barred': 0
+            }
+        }
+
+        storage.update(authFile)
+        with open('auth.json', 'w') as file:
+            json.dump(storage, file)
+
         with open("account_users.csv", "a", newline='') as file:
             writer = csv.writer(file)
             writer.writerow([firstName, lastName, userName, address, dateofBirth, bvn, phoneNumber, email, initialDeposit, accountNumber])
@@ -108,7 +129,7 @@ class Registration:
                 while True:
                     if name.lower() in checkExintingUserNames:
                         number = randint(1, 99)
-                        print(f"Username already exist, we suggest {name + "0"}{number}")
+                        print(f"Username already exist, we suggest {name + '0'}{number}")
                         name = input(f"Enter your {nameType} name$: ")
                     else:
                         print()
