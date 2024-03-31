@@ -7,3 +7,6 @@ function startfb {
 
 to delete alias
 Remove-Item -Path Alias:\runBankApp
+
+create an excecutable app
+pyinstaller startFB.py --onefile --distpath dist

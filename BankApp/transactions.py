@@ -79,5 +79,4 @@ class Transaction:
                             print(f"Balance for {self.accountNumber}: ${row[8]}".center(100))
                     except ValueError:
                         pass
-        else:
-            print("Account Number: Invalid".center(100))
+

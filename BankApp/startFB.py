@@ -14,7 +14,7 @@ class MyPrompt(Cmd):
     def do_exit(self, arg):
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Exiting...")
-        sleep(5)
+        sleep(2)
         os.system('cls' if os.name == 'nt' else 'clear')
         return True
 

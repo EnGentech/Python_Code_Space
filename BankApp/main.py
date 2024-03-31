@@ -2,12 +2,17 @@ from transactions import Transaction
 from register import Registration
 import os
 import csv
-import json
+from jsonSerializer import JsonSerializers as bank
+from auth import AuthEngine
 
 class MainExec:
 
     def __init__(self):
         pass
+
+    def bankData(self):
+        data = bank().loadData()
+        return data
     
     def newRegister(self):
         Registration.register()
@@ -23,14 +28,12 @@ class MainExec:
 
     def validateBarred(self, accountNumber):
         """validate if user has been barred or not"""
-        with open("auth.json", 'r') as file:
-            content = json.load(file)
-            try:
-                barredStatus = content[accountNumber]['barred']
-                if barredStatus == 1:
-                    return True
-            except KeyError:
-                pass
+        try:
+            barredStatus = self.bankData()[accountNumber]['barred']
+            if barredStatus == 1:
+                return True
+        except KeyError:
+            pass
 
     def getAccountNumber(self):
         userName = input("Enter your username: ")
@@ -46,10 +49,8 @@ class MainExec:
 
     def checkWithdrawalPin(self, accountNumber, pin):
         """Confirm if pin is available in database"""
-        with open('auth.json', 'r') as file:
-            accoundContent = json.load(file)
-        if accountNumber in accoundContent:
-            accountPin = accoundContent[accountNumber]['auth']
+        if accountNumber in self.bankData():
+            accountPin = self.bankData()[accountNumber]['auth']
             try:
                 pin = int(pin)
                 if accountPin == pin:
@@ -61,10 +62,8 @@ class MainExec:
 
     def validateAuth(self, accountNumber):
         """this function will validate users authenticity"""
-        with open('auth.json', 'r') as file:
-            content = json.load(file)
-        if accountNumber in content:
-            password = content[accountNumber]['auth']
+        if accountNumber in self.bankData():
+            password = self.bankData()[accountNumber]['auth']
             if password == None:
                 while True:
                     print("Please set up withdrawal pin (only 4 numeric digits are allowed)".center(100))
@@ -75,10 +74,10 @@ class MainExec:
                             confirmation = input("Please confirm Password$ ")
                             if getPassword == int(confirmation):
                                 passkey = input("Enter your passkey [Note this will be used in case you forget your password]$ ")
-                                content[accountNumber]['auth'] = getPassword
-                                content[accountNumber]['passkey'] = passkey
-                                with open('auth.json', 'w') as file:
-                                    json.dump(content, file)
+                                updateData = self.bankData()
+                                updateData[accountNumber]['auth'] = getPassword
+                                updateData[accountNumber]['passkey'] = passkey
+                                bank().dumpData(updateData)
                                 print("You have successfully registered a withdrawal pin, proceed to withdrawal".center(100))
                                 confirmation = self.checkWithdrawalPin(accountNumber, getPassword)
                                 if confirmation:
@@ -92,18 +91,17 @@ class MainExec:
             else:
                 count = 3
                 while True:
-                    pin = input("Enter withdrawal pin$ ")
+                    pin = input("Enter authentication pin$ ")
                     confirmation = self.checkWithdrawalPin(accountNumber, pin)
                     if confirmation:
                         return True
                     count -= 1
                     if count == 0:
-                        print('You have exceeded your limit, you are now barred from withdrawal, reset your pin to continue'.center(100))
-                        with open('auth.json', 'r') as file:
-                            content = json.load(file)
-                        content[accountNumber]['barred'] = 1
-                        with open('auth.json', 'w') as file:
-                            json.dump(content, file)
+                        print()
+                        print('You have exceeded your limit, you are now barred from this service, reset your pin to continue'.center(100))
+                        data = self.bankData()
+                        data[accountNumber]['barred'] = 1
+                        bank().dumpData(data)
                         break
                     print(f"Invalid pin you have {count} more attempt".center(100))
         else:
@@ -134,17 +132,11 @@ class MainExec:
                     amount = input("Enter the amount you want to Withdraw: ")
                     checkValidation = self.validateBarred(accountNumber)
                     if checkValidation:
+                        print()
                         print("This account Number has been barred".center(100))
-                        while True:
-                            reset = input("Would you love to reset your password [enter yes or no]$ ")
-                            if reset.lower() == "yes":
-                                pass
-                            elif reset.lower() == "no":
-                                os.system("cls" if os.name == 'nt' else "clear")
-                                print("Welcome to First Bank, enter run to start the app or exit to quit.".center(100))
-                                return False
-                            else:
-                                print('Invalid Selection, try again'.center(100))
+                        response = AuthEngine().reset(accountNumber, amount=amount)
+                        if response == False:
+                            return False
                     validate = self.validateAuth(accountNumber)
                     try:
                         accountNumber = int(accountNumber)
@@ -156,10 +148,17 @@ class MainExec:
                         print("Only numeric input is allowed".center(100))
                 elif select == 4:
                     accountNumber = input("Enter your account number: ")
+                    checkValidation = self.validateBarred(accountNumber)
+                    if checkValidation:
+                        print()
+                        print("This account Number has been barred".center(100))
+                        response = AuthEngine().reset(accountNumber)
+                        if response == False:
+                            return False
+                    validate = self.validateAuth(accountNumber)
                     try:
                         accountNumber = int(accountNumber)
-                        validateUser = self.validateAuth(accountNumber)
-                        if validateUser:
+                        if validate:
                             self.getBalance(accountNumber)
                     except ValueError:
                         print("Only numeric input is allowed".center(100))
@@ -167,6 +166,7 @@ class MainExec:
                     self.getAccountNumber()
                 elif select == 6:
                     os.system('cls' if os.name == 'nt' else 'clear')
+                    print("Welcome to First Bank, enter run to start the app or exit to quit.".center(100))
                     break
                 else:
                     print("Invalid selection".center(100))

@@ -17,13 +17,9 @@ const favoriteQuotes = [
     "The greatest glory in living lies not in never falling, but in rising every time we fall. - Nelson Mandela",
     "Believe you can and you're halfway there. - Theodore Roosevelt"
   ];
-  
-let quotesHTML = '';
-for (let quote of favoriteQuotes) {
-quotesHTML += `<p>${quote}</p>`;
-}
-  
-const wrapper = document.createElement("div")
-wrapper.innerHTML = quotesHTML
 
-document.body.append(wrapper)
+  const body = document.querySelector('body');
+
+  for (let i = 0; i < favoriteQuotes.length; i++) {
+    body.innerHTML += `<p>${favoriteQuotes[i]}</p>`;
+}
