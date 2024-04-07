@@ -102,7 +102,7 @@ function formHasErrors() {
 	const city = document.getElementById("city").value;
 	const email = document.getElementById("email").value;
 	const postal = document.getElementById("postal").value
-    const postalRegex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+    const postalCodePattern = /^[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d$/;
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	const cardSelect = document.getElementsByName("cardtype");
 	const cartName = document.getElementById("cardname").value;
@@ -139,10 +139,12 @@ function formHasErrors() {
 	if (digitCheck !== parseInt(lastDigit)) {
 		return true;
 	}
+
+	// (!postalRegex.test(postal)) || 
 	
     if (
 		(fullName.trim() === "") || (address.trim() === "") || 
-		(city.trim() === "") || (!postalRegex.test(postal)) || 
+		(city.trim() === "") || (!postalCodePattern.test(postal)) ||
 		(!emailRegex.test(email) || (cardCheckStatus === 0) || 
 		(cartName.trim() === "") || (month.trim() === "- Month -") ||
 		(year.trim() === "") || (year < currentYear) || ( year == currentYear && month < currentMonth))
