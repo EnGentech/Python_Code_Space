@@ -28,6 +28,7 @@ function validate(e) {
 	if (formHasErrors()) {
 		// Prevents the form from submitting
 		e.preventDefault();
+		displayValidationErrors();
 
 		// When using onSubmit="validate()" in markup, returning false would prevent
 		// the form from submitting
@@ -69,6 +70,23 @@ function resetForm(e) {
 	// the form from resetting
 	return false;
 }
+
+function displayValidationErrors() {
+    const fields = document.querySelectorAll('input[type="text"], input[type="number"]');
+
+    fields.forEach(field => {
+        const errorElement = document.getElementById(field.id + '_error');
+
+        if (errorElement) {
+            if (field.value.trim() === '') {
+                errorElement.style.display = 'block';
+            } else {
+                errorElement.style.display = 'none';
+            }
+        }
+    });
+}
+
 
 /*
  * Does all the error checking for the form.
@@ -113,7 +131,7 @@ function formHasErrors() {
 	let cardCheckStatus = 0
 	const date = new Date();
 	const currentYear = date.getFullYear();
-	const currentMonth = date.getMonth() + 1;
+	const currentMonth = date.getMonth() + 1;	
 
 	for (let i = 0; i < cardSelect.length; i++) {
 		if (cardSelect[i].checked) {
@@ -122,8 +140,11 @@ function formHasErrors() {
 		}
 	}
 
+	let nonValidated = []
+
 	if (cardNumber.length !== 10) {
-        return true;
+		let cardError = document.getElementById("invalidcard_error");
+		nonValidated.push(cardError)
     }
 
 	const checkingFactors = [4, 3, 2, 7, 6, 5, 4, 3, 2];
@@ -137,15 +158,44 @@ function formHasErrors() {
 	const lastDigit = cardNumber.charAt(cardNumber.length - 1);
 
 	if (digitCheck !== parseInt(lastDigit)) {
-		return true;
+		let cardError2 = document.getElementById("invalidcard_error");
+		nonValidated.push(cardError2)
 	}
 
-	// (!postalRegex.test(postal)) || 
+	if (!emailRegex.test(email)){
+		let emailError = document.getElementById("emailformat_error");
+		nonValidated.push(emailError)
+	}
+
+	if (!postalCodePattern.test(postal)){
+		let postalError = document.getElementById("postalformat_error");
+		nonValidated.push(postalError)
+	}
+
+	if (month.trim() === "- Month -"){
+		let monthError = document.getElementById("month_error");
+		nonValidated.push(monthError)
+	}
 	
+	if ((year.trim() === "") || (year < currentYear) || ( year == currentYear && month < currentMonth)){
+		let yearError = document.getElementById("expiry_error");
+		nonValidated.push(yearError)
+	}
+
+	if (cardCheckStatus === 0){
+		let checkStatusError = document.getElementById("cardtype_error");
+		nonValidated.push(checkStatusError)
+	}
+
+	console.log(nonValidated)
+	nonValidated.forEach(error => {
+		error.style.display = "block";
+	})
+
     if (
 		(fullName.trim() === "") || (address.trim() === "") || 
 		(city.trim() === "") || (!postalCodePattern.test(postal)) ||
-		(!emailRegex.test(email) || (cardCheckStatus === 0) || 
+		(!emailRegex.test(email) || (cardCheckStatus === 0) || (digitCheck !== parseInt(lastDigit)) ||
 		(cartName.trim() === "") || (month.trim() === "- Month -") ||
 		(year.trim() === "") || (year < currentYear) || ( year == currentYear && month < currentMonth))
 	) {
@@ -293,10 +343,12 @@ function hideErrors() {
 /*
  * Handles the load event of the document.
  */
+
 function load() {
 	//	Populate the year select with up-to-date values
 	let year = document.getElementById("year");
 	let currentDate = new Date();
+	hideErrors()
 	for (let i = 0; i < 7; i++) {
 		let newYearOption = document.createElement("option");
 		newYearOption.value = currentDate.getFullYear() + i;
